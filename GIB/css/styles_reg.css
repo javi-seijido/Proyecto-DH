@@ -60,7 +60,7 @@ margin-bottom: 0%;
 
 .personal_border, h1{
   border: solid 1px rgb(0, 0, 0);
-  margin: -1% 7% 5% 7%;
+  margin: 1% 7% 2% 7%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   background-color: rgba(255, 255, 255, 0.3);
@@ -70,7 +70,7 @@ margin-bottom: 0%;
 
 .personal_operativo{
   border: solid 1px rgb(0, 0, 0);
-  margin: -1% 7%;
+  margin: 4% 7%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   background-color: rgba(255, 255, 255, 0.3);
@@ -163,17 +163,6 @@ margin: 2%;
 
 @media (min-width: 650px){
 
-
-  h1{
-    border: solid 1px rgb(0, 0, 0);
-    margin: 4% 7% 1% 7%;
-    box-shadow: 4px 4px 7px rgb(0, 0, 0);
-    padding: 1%;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    width: 86%;
-  }
-
   .volver_logo{
   width: 5em;
   height: 5em;
@@ -201,15 +190,15 @@ width:26%;
 .personal_operativo{
 
 width: 38%;
-margin: -1% 0%;
+margin: 0 7% 0 5%;
 float: left;
-margin-left:4%;
+
 
 }
 .personal_border{
-width: 40%;
+width: 38%;
 float: left;
-margin-right:4%;
+margin: 0 5% 0 7%;
 }
 
 .datos_personales{
