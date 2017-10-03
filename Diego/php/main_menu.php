@@ -11,60 +11,28 @@
     <link rel="stylesheet" href="../css/styles_menu.css">
   </head>
   <body>
-    <div class="div_titulo">
-        <h1 class="titulo">Menu</h1>
+    <div class="titulo_div">
+      <a href="main_menu.php"><img class= "img_menu" src="../images/home.gif" alt="home"></a>
+      <h1 class="titulo">Menu</h1>
     </div>
 
     <nav class="header">
   			<ul class="menu">
-  				<li><a  href="registro_personal.php"> ABM Usuarios</a></li>
-          <li><a href="#"> ABM Personal</a></li>
+  				<li><a  href="#"> ABM Usuarios</a></li>
+          <li><a href="registro_personal.php"> ABM Personal</a></li>
           <li><a href="#"> ABM Alarmas</a></li>
           <li><a href="#"> ABM Suministros</a></li>
-          <li><a href="faq_alt.html"> Prosedimientos frecuentes</a></li>
-  				<li><a href="">Consultas/Informes</a>
-  					<ul>
-  						<li ><a class="sub_a_nav" href="">Submenu1</a></li>
-  						<li><a class="sub_a_nav" href="">Submenu2</a></li>
-  						<li><a class="sub_a_nav" href="">Submenu3</a></li>
-  						<li><a class="sub_a_nav" href="">Submenu4</a></li>
+          <li><a href="faq_alt.html"> Procedimientos frecuentes</a></li>
+  				<li class="clic"><a href="">Consultas/Informes</a>
+  					<ul class="sub_a_nav">
+  						<li><a href="">Submenu1</a></li>
+  						<li><a href="">Submenu2</a></li>
+  						<li><a href="">Submenu3</a></li>
+  						<li><a href="">Submenu4</a></li>
   					</ul>
   				</li>
   			</ul>
   		</nav>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <!-- <nav class="main_nav">
-         <ul>
-           <li><a href="registro_personal.php"> ABM Users.</a></li>
-           <li><a href="#"> ABM Vehiculos</a></li>
-           <li><a href="#"> ABM Alarmas</a></li>
-           <li><a href="#"> Siniestros.</a></li>
-           <li><a href="#"> Historial de Siniestros.</a></li>
-         </ul>
-      </nav> -->
 
   </body>
 </html>
