@@ -10,6 +10,7 @@ body{
   background-attachment: fixed;
   background-position: center center;
   font-size: 10px;
+  height: 100vh;
 }
 
 .loguin_usr{
@@ -31,12 +32,12 @@ body{
 .loguin_border{
   position: relative;
   border: solid 1px rgb(0, 0, 0);
-  margin: 10% 10%;
+  margin: 10% 7%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 10px;
-  width: 80%;
+  width: 86%;
 }
 
 .label_usr{
@@ -118,9 +119,9 @@ body{
 }
 @media (min-width: 650px){
 
-  body{
+  /*body{
     background-attachment: none;
-  }
+  }*/
 
   .loguin_border{
     left: 25%;
@@ -158,9 +159,9 @@ body{
 
 @media (min-width: 1200px){
 
-  body{
+  /*body{
     background-attachment: none;
-  }
+  }*/
 
   .loguin_border{
     left: 25%;

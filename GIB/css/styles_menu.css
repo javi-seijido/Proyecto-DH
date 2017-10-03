@@ -13,12 +13,12 @@
     font-family:'Merriweather', serif;
     position: relative;
     border: solid 1px rgb(0, 0, 0);
-    margin: 10% 10%;
+    margin: 10% 7%;
     box-shadow: 4px 4px 7px rgb(0, 0, 0);
     padding: 1%;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
-    width: 80%;
+    width: 86%;
   }
 
 .titulo{
@@ -36,6 +36,7 @@
  background-color: rgba(255, 255, 255, 0.3);
  border-radius: 10px;
  width: 86%;
+
 }
 
 .menu li{
