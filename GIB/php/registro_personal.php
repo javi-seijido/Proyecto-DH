@@ -14,7 +14,6 @@
 
 
         <h1 align="center"> Registro De Personal:    </h1>
-        <br><br>
 
         <div class="container">
 
