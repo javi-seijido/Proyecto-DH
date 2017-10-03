@@ -16,87 +16,89 @@
         <h1 align="center"> Registro De Personal:    </h1>
         <br><br>
 
-        <form class="personal_border">
+        <div class="container">
 
-          <section class="datos_personales">
+                <form class="personal_border">
 
-
-
-                  <img class="foto_perfil" src="../images/bombero.jpg" alt="foto_perfil">
-
-                  <br><br>
-
-          </section>
-
-            <section class="datos_personales">
-                    <label class="label_usr" for="legajo">Legajo N°:</label>
-                    <input class="us_campo"type="text" name="legajo" id="legajo" required>
-                    <br><br>
+                  <section class="datos_personales">
 
 
-                    <label class="label_usr" for="nombre">Nombre: </label>
-                    <input class="us_campo"type="text" name="nombre" id="nombre" required>
-                    <br><br>
 
-                    <label class="label_usr"for="apellido">Apellido: </label>
-                    <input class="us_campo" type="text" name="apellido" id="apellido" required>
-                    <br><br>
+                            <img class="foto_perfil" src="../images/bombero.jpg" alt="foto_perfil">
 
-                    <label class="label_usr" for="edad">Edad: </label>
-                    <input class="us_campo"type="text" name="edad" id="edad" required>
-                    <br><br>
+                            <br><br>
 
-                    <label class="label_usr">Genero:</label> <br>
-                    <br>
-                    <label class="genero">
-              			<input type="radio" name="genero" checked>
-              				Femenino
-              			</label>
-              			<label class="genero">
-              			<input type="radio" name="genero">
-              				Masculino
-              			</label>
-              			<label class="genero">
-              			<input type="radio" name="genero">
-              				Otro
-              			</label>
-                    <br><br>
+                  </section>
 
-                    <label class="label_usr" for="fnacimiento">Fecha de Nacimiento: </label>
-                    <input class="us_campo" type="date" name="fnacimiento" id="fnacimiento" required>
-                    <br><br>
+                    <section class="datos_personales">
+                            <label class="label_usr" for="legajo">Legajo N°:</label>
+                            <input class="us_campo"type="text" name="legajo" id="legajo" required>
+                            <br><br>
 
-                    <label class="label_usr"for="dni">Numero de DNI: </label>
-                    <input class="us_campo"type="number" name="dni" id="dni" required>
-                    <br><br>
 
-                    <label class="label_usr" for="telefonomovil">Telefono Movil: </label>
-                    <input class="us_campo"type="number" name="telefonomovil" id="telefonomovil" placeholder="ej: 1157025896 10 Nueros"required>
-                    <br><br>
+                            <label class="label_usr" for="nombre">Nombre: </label>
+                            <input class="us_campo"type="text" name="nombre" id="nombre" required>
+                            <br><br>
 
-                    <label class="label_usr" for="correo">Correo electrónico:</label>
-                    <input class="us_campo" type="email" name="correo" id="correo" placeholder="email@server.com"required>
-                    <br><br>
+                            <label class="label_usr"for="apellido">Apellido: </label>
+                            <input class="us_campo" type="text" name="apellido" id="apellido" required>
+                            <br><br>
 
-                    <label class="label_usr">Direccion:</label>
-                    <br><br>
-                    <label class="label_usr" for="dir_calle">Calle:. </label>
-                    <input class="us_campo"type="text" name="dir_calle" id="dir_calle" required>
-                    <br><br>
-                    <label class="label_usr" for="num_calle">Numero:</label>
-                    <input class="us_campo"type="number" name="num_calle" id="num_calle" required>
-                    <br><br>
-                    <label class="label_usr">Localidad:</label>
-                        <select class="us_campo" name="localidad"required>
-                              <option value="av">Avellaneda</option>
-                              <option value="sar">Sarandi</option>
-                              <option value="vd">Villa Dominico</option>
-                        </select>
-                    <br><br>
+                            <label class="label_usr" for="edad">Edad: </label>
+                            <input class="us_campo"type="text" name="edad" id="edad" required>
+                            <br><br>
 
-          </section>
+                            <label class="label_usr">Genero:</label> <br>
+                            <br>
+                            <label class="genero">
+                      			<input type="radio" name="genero" checked>
+                      				Femenino
+                      			</label>
+                      			<label class="genero">
+                      			<input type="radio" name="genero">
+                      				Masculino
+                      			</label>
+                      			<label class="genero">
+                      			<input type="radio" name="genero">
+                      				Otro
+                      			</label>
+                            <br><br>
 
-        </form>
+                            <label class="label_usr" for="fnacimiento">Fecha de Nacimiento: </label>
+                            <input class="us_campo" type="date" name="fnacimiento" id="fnacimiento" required>
+                            <br><br>
+
+                            <label class="label_usr"for="dni">Numero de DNI: </label>
+                            <input class="us_campo"type="number" name="dni" id="dni" required>
+                            <br><br>
+
+                            <label class="label_usr" for="telefonomovil">Telefono Movil: </label>
+                            <input class="us_campo"type="number" name="telefonomovil" id="telefonomovil" placeholder="ej: 1157025896 10 Nueros"required>
+                            <br><br>
+
+                            <label class="label_usr" for="correo">Correo electrónico:</label>
+                            <input class="us_campo" type="email" name="correo" id="correo" placeholder="email@server.com"required>
+                            <br><br>
+
+                            <label class="label_usr">Direccion:</label>
+                            <br><br>
+                            <label class="label_usr" for="dir_calle">Calle:. </label>
+                            <input class="us_campo"type="text" name="dir_calle" id="dir_calle" required>
+                            <br><br>
+                            <label class="label_usr" for="num_calle">Numero:</label>
+                            <input class="us_campo"type="number" name="num_calle" id="num_calle" required>
+                            <br><br>
+                            <label class="label_usr">Localidad:</label>
+                                <select class="us_campo" name="localidad"required>
+                                      <option value="av">Avellaneda</option>
+                                      <option value="sar">Sarandi</option>
+                                      <option value="vd">Villa Dominico</option>
+                                </select>
+                            <br><br>
+
+                  </section>
+
+                </form>
 
 
                 <form class="personal_operativo">
@@ -134,14 +136,14 @@
 
                  </section>
       </form>
-
+    </div>
       <footer class="footer_reg">
 
           <a href="main_menu.php">
-              <img src="../images/volver.png" width="32" height="32">
+              <img class="volver_logo" src="../images/volver.png">
 
           </a>
-        
+
       </footer>
 
 

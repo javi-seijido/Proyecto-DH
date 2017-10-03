@@ -14,13 +14,22 @@ body{
 
 }
 
+.container{
+position: relative;
+width: 100%;
+/*overflow: hidden;*/
+
+}
+
 h1{
   color:rgb(237, 200, 43);
 }
 
 .footer_reg{
 text-align: center;
-margin-top: 5%;
+width: 100%;
+clear: both;
+margin-bottom: 0%;
 
 
 
@@ -141,7 +150,14 @@ margin-top: 5%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   color: rgb(152, 152, 152);
   width: 96%;
-  height: 13.4em;
+  height: 14.09em;
+}
+
+.volver_logo{
+width: 4em;
+height: 4em;
+margin: 2%;
+
 }
 
 
@@ -157,6 +173,11 @@ margin-top: 5%;
     border-radius: 10px;
     width: 86%;
   }
+
+  .volver_logo{
+  width: 5em;
+  height: 5em;
+  margin: 2%;
 
 
 
@@ -196,5 +217,9 @@ display: inline;
 margin:-2%;
 }
 
+.volver_logo{
+width: 6em;
+height: 6em;
+margin: 2%;
 
 }
