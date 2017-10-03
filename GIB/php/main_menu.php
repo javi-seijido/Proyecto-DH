@@ -18,11 +18,11 @@
 
     <nav class="header">
   			<ul class="menu">
-  				<li><a  href="registro_personal.php"> ABM Usuarios</a></li>
-          <li><a href="#"> ABM Personal</a></li>
+  				<li><a  href="#"> ABM Usuarios</a></li>
+          <li><a href="registro_personal.php"> ABM Personal</a></li>
           <li><a href="#"> ABM Alarmas</a></li>
           <li><a href="#"> ABM Suministros</a></li>
-          <li><a href="faq_alt.html"> Prosedimientos frecuentes</a></li>
+          <li><a href="faq_alt.html"> Procedimientos frecuentes</a></li>
   				<li class="clic"><a href="">Consultas/Informes</a>
   					<ul class="sub_a_nav">
   						<li><a href="">Submenu1</a></li>
