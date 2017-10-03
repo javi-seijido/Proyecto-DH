@@ -1,0 +1,205 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  font-family: 'Merriweather', serif;
+  background-image: url(../images/img_login1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  font-size: 10px;
+  height: 100vh;
+}
+
+.loguin_usr{
+  clear: both;
+  position: relative;
+  color: rgb(0, 0, 0);
+  text-align: left;
+  font-weight: bold;
+  padding: 2%;
+  margin: 5% 0;
+}
+
+.img_usr{
+  display: block;
+  width: 12%;
+  margin: 1%;
+}
+
+.loguin_border{
+  position: relative;
+  border: solid 1px rgb(0, 0, 0);
+  margin: 10% 7%;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  padding: 1%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  width: 86%;
+}
+
+.label_usr{
+ position: absolute;
+ font-size: 1.2em;
+
+}
+
+.us_log{
+  position: absolute;
+  left: 26%;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1.2em;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  color: rgb(152, 152, 152);
+  width: 65%;
+}
+
+.pa_log{
+  position: absolute;
+  left: 25.1%;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1.2em;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  color: rgb(152, 152, 152);
+  width: 67.5%;
+}
+
+.remember{
+  position: absolute;
+  left: 57%;
+  font-size: 1em;
+  margin-top: 3%;
+}
+
+.change_pass{
+  position: absolute;
+  font-size: 1em;
+  padding: 2%;
+  margin-top: 2%;
+}
+
+
+.input{
+  position: inherit;
+  font-size:1.2em;
+  font-weight:bold;
+  color:white;
+  background: #8162FE;
+  border:0px;
+  width:25%;
+  height:25px;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  margin: 15% 36% 5%;
+}
+
+.ayes {
+ width:7%;
+ position: absolute;
+ left: 86%;
+ top: 20%;
+}
+
+.pos_ayes{
+  clear: both;
+  position: relative;
+  margin-top: 2%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+.logo_bomberos {
+  width:15%;
+  margin: 2%;
+}
+@media (min-width: 650px){
+
+  /*body{
+    background-attachment: none;
+  }*/
+
+  .loguin_border{
+    left: 25%;
+    margin: 5% -5%;
+    width: 60%;
+  }
+
+  .remember {
+      left: 68%;
+      margin-top: 5%;
+  }
+
+  .change_pass{
+    margin-top: 3%;
+  }
+
+  /*.ayes {
+   top: 20%;
+  }*/
+
+  .logo_bomberos {
+    width:10%;
+    margin: 1.5%;
+  }
+
+  .pa_log{
+    left: 26.8%;
+  }
+
+  .us_log{
+    left: 27%;
+  }
+
+}
+
+@media (min-width: 1200px){
+
+  /*body{
+    background-attachment: none;
+  }*/
+
+  .loguin_border{
+    left: 25%;
+    margin: 0% 5%;
+    width: 40%;
+  }
+
+  .remember {
+      position: absolute;
+      left: 71%;
+      font-size: 1em;
+  }
+
+  .ayes {
+   left: 88%
+  }
+
+  .change_pass{
+    margin-top: 3%;
+    margin-left: 50px;
+  }
+
+  .logo_bomberos {
+    width:10%;
+    margin: 1.5%;
+  }
+
+  .pa_log{
+    margin-top: 4px;
+  }
+
+  .label_usr{
+   margin-top: 4px;
+   margin-left: 50px;
+
+  }
+
+  .input {
+    margin: 15% 39% 5%;
+
+}
