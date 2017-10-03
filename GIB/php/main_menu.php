@@ -21,7 +21,7 @@
           <li><a href="#"> ABM Personal</a></li>
           <li><a href="#"> ABM Alarmas</a></li>
           <li><a href="#"> ABM Suministros</a></li>
-          <li><a href="#"> Prosedimientos frecuentes</a></li>
+          <li><a href="faq_alt.html"> Prosedimientos frecuentes</a></li>
   				<li><a href="">Consultas/Informes</a>
   					<ul>
   						<li ><a class="sub_a_nav" href="">Submenu1</a></li>
