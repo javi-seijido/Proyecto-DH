@@ -90,3 +90,25 @@ ul.nav-items{
   height: 15.8em;
   display: block;
 }
+
+
+@media (min-width: 650px){
+  .img_menu{
+    left: 8%;
+    width: 4%;
+  }
+
+}
+
+@media (min-width: 1200px){
+  .img_menu{
+    left: 7%;
+    top: -8%;
+    width: 3%;
+  }
+
+  .sub_a_nav{
+    display: none;
+  }
+
+}
