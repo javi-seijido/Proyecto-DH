@@ -155,10 +155,10 @@
 	</div>
 </div>
 <br><br><br><br>
-<footer class="footer_reg">
+<footer class="footer">
 
 		<a href="main_menu.php">
-				<img class="volver_logo" src="../images/volver.png">
+				<img class="footer" src="../images/volver.png">
 
 		</a>
 
