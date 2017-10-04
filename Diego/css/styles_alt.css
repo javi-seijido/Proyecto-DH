@@ -14,7 +14,8 @@ body{
 }
 
 .container{
-	width: 85%;
+	width: 90%;
+	height: 80px;
 	margin: auto;
 	position: relative; /* para que la caja con position: absolute; no se escape */
 }
@@ -22,22 +23,20 @@ body{
 /* agrupación de selectores */
 
 .principal{
-	width: 95%;
-	height: 90px;
+	width: 90%;
+	height: 36px;
 	background-color: red;
 	margin: auto;
-	border-radius: 12px;
-
-
+	border-radius: 8px;
+	font-size: 16px;
 }
 
 .box01{
 	width: 30%;
-	height: 177px;
+	height: 72px;
 	background-color: black;
-	position: relative;
-
-
+	position: absolute;
+	overflow: hidden;
 }
 
 .img_box1{
@@ -54,55 +53,112 @@ body{
 
 .box03{
 	width: 70%;
-	height: 192px;
+	height: 72px;
 	background-color: rgb(248, 255, 111);
 	float: right;
 	padding-left: 8px;
-	margin-top: -176px;
+
 }
 
-.box04{
-	background-color: rgb(196, 129, 237);
-	position: fixed;
-	left: 0;
-	bottom: 0;
-}
 .maintitle{
 	color: white;
 	font-family: verdana;
-	font-size: 48px;
+	font-size: 16px;
 	text-align: center;
 	padding-right: 10px;
-	padding-top: 15px;
+	padding-top: 8px;
 }
+
 .titulo{
 	width: 100%;
-	height: 50px;
+	height: 24px;
 	background-color: rgb(93, 93, 93);
 	padding: 0px;
 	margin: auto;
-	border-radius: 12px;
+	border-radius: 8px;
 }
 
 .cabezal{
   color: white;
   font-family: verdana;
-  font-size: 35px;
+  font-size: 15px;
 	text-align: center;
 	border-radius: 3px;
 }
 
 .descripcion{
-font-size: 25px;
+font-size: 9px;
 font-family: sans-serif;
 }
 
-/*@media (max-width: 360px) {
-  body {
-    font-size: 16px;
-  }
+.volver_logo{
+width: 4em;
+height: 4em;
+margin: 5%;
+
+}
+
+@media (min-width: 650px) {
 	.container{
-		width: 42%;
+		width: 90%;
+		height: 120px;
 		margin: auto;
 		position: relative; /* para que la caja con position: absolute; no se escape */
-	
+	}
+
+	.box01{
+		width: 30%;
+		height: 120px;
+		background-color: black;
+		position: absolute;
+		overflow: hidden;
+	}
+
+	.box03{
+		width: 70%;
+		height: 120px;
+		background-color: rgb(248, 255, 111);
+		float: right;
+		padding-left: 8px;
+	}
+
+	.descripcion{
+	font-size: 13px;
+	font-family: sans-serif;
+	}
+}
+
+@media (min-width: 1200px) {
+	.container{
+		width: 55%;
+		height: 150px;
+		display: block;
+	}
+
+	.box01{
+		width: 30%;
+		height: 150px;
+		background-color: black;
+		position: absolute;
+		overflow: hidden;
+	}
+
+	.box03{
+		width: 70%;
+		height: 150px;
+		background-color: rgb(248, 255, 111);
+		float: right;
+		padding-left: 8px;
+	}
+
+	.descripcion{
+	font-size: 16px;
+	font-family: sans-serif;
+	}
+	.volver_logo{
+	width: 4em;
+	height: 4em;
+	margin-left: 20%;
+
+	}
+}
