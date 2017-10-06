@@ -1,3 +1,39 @@
+<?php
+  require_once('funciones_log.php');
+
+	$var_usr = '';
+	$var_pass = '';
+  $errores_finales = [];
+
+	if ($_POST) {
+		// Validación
+		$errores_finales = validarUsuario($_POST);
+
+    if (empty($errores_finales)){
+       //$usuarios = traerTodos($_POST);
+
+       $usr_selec = $_POST["usr"];
+       $todo = $_POST;
+
+       $usr_ok = comprobarUsuario($usr_selec,$todo);
+
+
+       if (empty($usr_ok)) {
+         $errores_finales['er_usr'] =  'Usuario Erroneo';
+       } else {
+           if (!password_verify($_POST["pass"], $usr_ok["password"])) {
+             $errores_finales['er_pass'] =  'Password Erronea';
+           } else {
+             ingresar_al_menu();
+           }
+       }
+    // Para la persistencia
+      $var_usr = $_POST['usr'];
+	 }
+ }
+
+
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,16 +50,39 @@
    	 <img class="logo_bomberos" src="../images/Logo3_Transparente.png" alt="logo_bomberos">
    </header>
 
-	 <form class= "loguin_border" action="main_menu.php" method="post">
+	 <form class= "loguin_border" action="" method="post">
   		 <img class="img_usr" src="../images/loguin.png" alt="">
 			 <section class="loguin_usr">
 
 					<label class="label_usr" for="user">Usuario: </label>
-					<input class="us_log" type="text" name="usr" placeholder=" User" id="usr" required> <br><br>
+
+					<input id="usr" class="us_log" type="text" name="usr" placeholder=" User" value=<?= $var_usr ?>>
+
+					<?php
+					if (isset($errores_finales['er_usr'])):
+					?>
+					 <div class="">
+						 <span class="error_usr_360" >.</span>
+						 <span class="men_er_usr_360" ><?=$errores_finales['er_usr'];?></span>
+						 <span class="class_err" ><?=$errores_finales['er_usr'];?></span>
+						 <img class="class_men_err" src="../images/menssage_err.png" alt="">
+					 </div>
+					<?php endif; ?> <br><br>
 
 					<div class="pos_ayes">
 						<label class="label_usr" for="pass">Password: </label>
-						<input class="pa_log" type="password" name="pass" placeholder=" Password" id="pass" required>
+						<input id="pass" class="pa_log" type="password" name="pass" placeholder=" Password" >
+
+						<?php
+
+						if (isset($errores_finales['er_pass'])):
+						?>
+						 <div class="div_err_pass">
+							 <span class="class_err_pass" ><?=$errores_finales['er_pass'];?></span>
+							 <img class="class_men_err_pass" src="../images/menssage_err.png" alt="">
+			 		  </div>
+						<?php endif; ?>
+
 						<img class="ayes"src="../images/ayes_pass.svg" alt="ver_pass" >
 					</div>
 						<!-- <button class="borrar" type="reset">Borrar</button> -->

@@ -53,7 +53,7 @@ body{
   font-weight: normal;
   font-size: 1.2em;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
-  color: rgb(152, 152, 152);
+  color: rgb(0, 0, 0);
   width: 65%;
 }
 
@@ -64,7 +64,7 @@ body{
   font-weight: normal;
   font-size: 1.2em;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
-  color: rgb(152, 152, 152);
+  color: rgb(0, 0, 0);
   width: 67.7%;
 }
 
@@ -101,7 +101,7 @@ body{
  width:7%;
  position: absolute;
  left: 86%;
- top: 20%;
+ top: -2px;
 }
 
 .pos_ayes{
@@ -117,6 +117,63 @@ body{
   width:15%;
   margin: 2%;
 }
+
+.class_err{
+  position: absolute;
+  left: 95%;
+  top: -133%
+  color: rgb(252, 0, 0);
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.class_men_err{
+  position: absolute;
+  left: -11%;
+  width: 166%;
+  height: 365%;
+}
+
+.div_err_pass {
+  position: relative;
+}
+
+.class_err{
+  display: none;
+
+
+}
+
+.class_men_err{
+  display: none;
+}
+.class_men_err_pass{
+  display: none;
+}
+
+.class_err_pass{
+  display: none;
+}
+
+.error_usr_360{
+  position: absolute;
+  left: 93%;
+  top: 24%;
+  background-color: rgb(255, 0, 0);
+  color: rgb(255, 0, 0);
+  font-size: 1em;
+  border-radius: 100%;
+  width: 4%;
+}
+
+.men_er_usr_360{
+  position: absolute;
+  left: 0;
+  top: 150px;
+  color: rgb(255, 0, 0);
+  font-size: 1em;
+}
+
 @media (min-width: 650px){
 
   /*body{
@@ -138,9 +195,9 @@ body{
     margin-top: 3%;
   }
 
-  /*.ayes {
-   top: 20%;
-  }*/
+  .ayes {
+    left: 88%;
+  }
 
   .logo_bomberos {
     width:10%;
@@ -155,6 +212,44 @@ body{
     left: 27%;
   }
 
+}
+
+.class_err{
+  position: absolute;
+  left: 100%;
+  top: -43%;
+  color: rgb(252, 0, 0);
+  font-size: 1.2em;
+  font-style: italic;
+
+}
+
+.class_men_err{
+  position: absolute;
+  left: 95%;
+  top: -62%;
+  width: 23%;
+  height: 52px;
+}
+.class_men_err_pass{
+  position: absolute;
+  left: 98%;
+  top: -26px;
+  width: 23%;
+  height: 52px;
+}
+
+.class_err_pass{
+  position: absolute;
+  left: 102%;
+  top: -15px;
+  color: rgb(252, 0, 0);
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.error_esr_360{
+  display: none;
 }
 
 @media (min-width: 1200px){
@@ -176,7 +271,7 @@ body{
   }
 
   .ayes {
-   left: 88%
+   left: 88%;
   }
 
   .change_pass{
@@ -202,4 +297,50 @@ body{
   .input {
     margin: 15% 39% 5%;
 
+}
+
+.class_err{
+  display: block;
+  position: absolute;
+  left: 100%;
+  top: -43%;
+  color: rgb(252, 0, 0);
+  font-size: 1.2em;
+  font-style: italic;
+
+}
+
+.class_men_err{
+  display: block;
+  position: absolute;
+  left: 95%;
+  top: -62%;
+  width: 23%;
+  height: 52px;
+}
+.class_men_err_pass{
+  display: block;
+  position: absolute;
+  left: 98%;
+  top: -26px;
+  width: 23%;
+  height: 52px;
+}
+
+.class_err_pass{
+  display: block;
+  position: absolute;
+  left: 102%;
+  top: -15px;
+  color: rgb(252, 0, 0);
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+.error_usr_360{
+  display: none;
+}
+
+.men_er_usr_360{
+  display: none;
 }
