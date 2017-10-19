@@ -129,7 +129,7 @@
 					if (isset($errores_finales['er_usr'])):
 					?>
 					 <div class="">
-						 <span class="error_usr" >.</span>
+						 <img class="error_usr" src="../images/logo_errores.png" alt="">
 					 </div>
 					<?php endif; ?> <br><br>
 
@@ -141,7 +141,7 @@
 						if (isset($errores_finales['er_pass'])):
 						?>
 						 <div class="div_err_pass">
-               <span class="error_pass" >.</span>
+               <img class="error_pass" src="../images/logo_errores.png" alt="">
       		   </div>
 						<?php endif; ?>
 
@@ -163,8 +163,9 @@
     <?php
       if (!empty($errores_finales)): ?>
         <div class="err_border">
+               <br>
                <?php foreach ($errores_finales as $value) { ?>
-                 <span class="men_er_usr_360" ><?=$value;?></span><br><br>
+                 <img src="../images/logo_errores.png" alt=""><span class="men_er_usr_360" > <?=' - '.$value;?></span><br><br>
                <?php } ?>
         </div>
     <?php endif; ?> <br>
