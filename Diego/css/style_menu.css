@@ -60,7 +60,7 @@ ul.nav-items {
     clear: both;
     height: 0;
     overflow: hidden;
-    transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; /*El menú cambia su altura y su color de fondo mediante una transición suavizada al voover a su estado unicial*/
+    /*transition: height 0.4s ease-in-out 0s, background-color 1s ease 0s; /*El menú cambia su altura y su color de fondo mediante una transición suavizada al voover a su estado unicial*/*/
 }
 
 #navigation:target ul.nav-items {
@@ -198,7 +198,7 @@ ul.nav-items2 {
     clear: both;
     height: 0;
     overflow: hidden;
-    transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; /*El menú cambia su altura y su color de fondo mediante una transición suavizada al voover a su estado unicial*/
+    /*transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; /*El menú cambia su altura y su color de fondo mediante una transición suavizada al voover a su estado unicial*/*/
     position: absolute;
     overflow: hidden;
 }

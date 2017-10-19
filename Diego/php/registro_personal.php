@@ -7,11 +7,16 @@
 		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
 		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 		<link rel="stylesheet" href="../css/normalize.css">
+    	<link rel="stylesheet" href="../css/style_menu.css">
     <link href="../css/styles_reg.css" rel="stylesheet">
 
   </head>
   <body>
+    <?php
+        require 'control_session.php';
+        require 'menu_cabecera.php';
 
+    ?>
 
         <h1 align="center"> Registro De Personal:    </h1>
 
