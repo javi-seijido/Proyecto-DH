@@ -1,6 +1,7 @@
 <?php
   session_start();
 
+  require('conexion.php');
   require_once('funciones_log.php');
 
 
@@ -66,11 +67,11 @@
     if (empty($errores_finales)){
 
        $usr_selec = $_POST["usr"];
-       $todo = $_POST;
+      //  $todo = $_POST;
 
-       $usr_ok = comprobarUsuario($usr_selec,$todo);
+       $usr_ok = comprobarUsuario($usr_selec,$db);
 
-       if (empty($usr_ok)) {
+       if (!isset($usr_ok)) {
          $errores_finales['er_usr'] =  'Usuario Erroneo';
        } else {
            if (!password_verify($_POST["pass"], $usr_ok["password"])) {

@@ -23,7 +23,7 @@
 
         <ul class="nav-items">
 
-          <li class="li_flecha" id="Usuarios"><a href="#Usuarios"> <span>ABM Usuarios</span>
+          <li class="li_flecha" id="Usuarios"><a href="login_usuarios.php"> <span>ABM Usuarios</span>
                              <img class="img_consultas" src="../images/select.png" alt=""></a></li></a></li>
 
           <li class="li_flecha" id="Personal"><a href="registro_personal.php"><span>ABM Personal</span>
