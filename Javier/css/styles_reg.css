@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 
-body{
+/*.body_reg{
   font-family: 'Merriweather', serif;
   background-image: url(../images/img_login1.jpg);
   background-size: cover;
@@ -12,7 +12,7 @@ body{
   font-size: 10px;
   height: 100vh;
 
-}
+}*/
 
 .container{
 position: relative;
@@ -58,9 +58,19 @@ margin-bottom: 0%;
   margin: 1%;
 }
 
+.personal_foto{
+  border: solid 1px rgb(0, 0, 0);
+  margin: 3% 7% 2% 7%;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  padding: 1%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  width: 86%;
+}
+
 .personal_border, h1{
   border: solid 1px rgb(0, 0, 0);
-  margin: -1% 7% 5% 7%;
+  margin: 3% 7% 2% 7%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   background-color: rgba(255, 255, 255, 0.3);
@@ -70,7 +80,7 @@ margin-bottom: 0%;
 
 .personal_operativo{
   border: solid 1px rgb(0, 0, 0);
-  margin: -1% 7%;
+  margin: 4% 7%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   background-color: rgba(255, 255, 255, 0.3);
@@ -90,7 +100,6 @@ margin-bottom: 0%;
 .input{
   position: inherit;
   font-size:1.2em;
-  /*font-family:Verdana,Helvetica;*/
   font-weight:bold;
   color:white;
   background: #8162FE;
@@ -100,6 +109,20 @@ margin-bottom: 0%;
   border-radius: 20px 20px 20px 20px;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   margin: 3% 1% 3%;
+}
+
+.input-file{
+
+  font-size:1.2em;
+  font-weight:bold;
+  color:white;
+  background: #8162FE;
+  border:0px;
+  width:31%;
+  height:25px;
+  border-radius: 20px 20px 20px 20px;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  margin: 3% 34% 3%;
 }
 
 .buscar_button{
@@ -131,16 +154,29 @@ margin-bottom: 0%;
   font-size: 12px;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   color: rgb(152, 152, 152);
-  width: 65%;
+  width: 58%;
 }
 
 
 .foto_perfil {
-  width:36%;
-  margin: 2%;
+  width:38%;
+  margin: 2% 31%;
   border: solid 1px rgb(0, 0, 0);
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   border-radius: 10px;
+}
+
+.span_error{
+
+background-color: red;
+color: white;
+margin-left: 42%;
+
+}
+
+.error_icon{
+  width: 6%;
+  margin: 0 0 -2% 2%;
 }
 
 .tex-tarea{
@@ -149,7 +185,7 @@ margin-bottom: 0%;
   font-size: 12px;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   color: rgb(152, 152, 152);
-  width: 96%;
+  width: 100%;
   height: 14.09em;
 }
 
@@ -163,23 +199,16 @@ margin: 2%;
 
 @media (min-width: 650px){
 
-
-  h1{
-    border: solid 1px rgb(0, 0, 0);
-    margin: 4% 7% 1% 7%;
-    box-shadow: 4px 4px 7px rgb(0, 0, 0);
-    padding: 1%;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    width: 86%;
-  }
-
   .volver_logo{
   width: 5em;
   height: 5em;
   margin: 2%;
+}
 
-
+.error_icon{
+  width: 4%;
+  margin: 0 0 -2% 5%;
+}
 
 }
 
@@ -201,15 +230,15 @@ width:26%;
 .personal_operativo{
 
 width: 38%;
-margin: -1% 0%;
+margin: 0 7% 0 5%;
 float: left;
-margin-left:4%;
+
 
 }
 .personal_border{
-width: 40%;
+width: 38%;
 float: left;
-margin-right:4%;
+margin: 0 5% 0 7%;
 }
 
 .datos_personales{
@@ -221,5 +250,25 @@ margin:-2%;
 width: 6em;
 height: 6em;
 margin: 2%;
+
+}
+
+.datos_operativos{
+  color: rgb(0, 0, 0);
+  text-align:left;
+  font-weight: bold;
+  padding: 2%;
+  display: block;
+}
+
+.personal_foto{
+  border: solid 1px rgb(0, 0, 0);
+  margin: 3% 7% 2% 7%;
+  box-shadow: 4px 4px 7px rgb(0, 0, 0);
+  padding: 1%;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  width: 86%;
+}
 
 }
