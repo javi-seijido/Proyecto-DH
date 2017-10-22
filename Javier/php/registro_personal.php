@@ -106,7 +106,7 @@ if ($_POST) {
 
                 <div class="personal_foto">
 
-                  <section class="datos_personales">
+                  <!-- <section class="datos_personales"> -->
                         <img class="foto_perfil" src="../images/sin_perfil2.png" alt="foto_perfil"><br>
 
 
@@ -119,10 +119,10 @@ if ($_POST) {
 
 
                           <?php if (isset($erroresFinales['imagen'])): ?>
-                          <span style="color: red;"><i class="ion-ios-close"></i></span>
-                          <span style="color: red;"><?=$erroresFinales['imagen'];?></span>
+                          <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                          <span class="span_error"><?=$erroresFinales['imagen'];?></span>
                         <?php endif; ?>
-                  </section>
+                  <!-- </section> -->
 
                 </div>
 
