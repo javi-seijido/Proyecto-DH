@@ -5,23 +5,33 @@
 		if (trim($data['codigo']) == '') {
 			$errores['codigo'] = 'Ingresar codigo';
 		}
+
 		if (trim($data['pass']) == '') {
-			$errores['pass'] = 'ingresar contraseña';
+			$errores['pass'] = 'Ingresar contraseña';
 		}
+
+		if (trim($data['repass']) == '') {
+			$errores['repass'] = 'Verificar contraseña';
+		} elseif (trim($data['pass']) != trim($data['repass'])) {
+			$errores['repass'] = 'Las contraseñas no coinciden!';
+		}
+
 		if (trim($data['email']) == '') {
-			$errores['email'] = 'Che escribí el email!';
+			$errores['email'] = 'Ingresar e-mail!';
 		} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-			$errores['email'] = 'Che el email ES INVALIDO!';
+			$errores['email'] = 'e-mail invalido!';
 		}
 
 		if (trim($data['nivel']) == '') {
-			$errores['nivel'] = 'Che elegí un usuario';
+			$errores['nivel'] = 'Determinar Nivel';
 		}
+
+
 
 		return $errores;
 	}
 
-	function crearUsuario_create($usuario){
+	function crearUsuario($usuario){
 		$usuarioFinal = [
 			'codigo' => $usuario['codigo'],
 			'password' => password_hash($usuario['pass'], PASSWORD_DEFAULT),
@@ -32,27 +42,13 @@
 		return $usuarioFinal;
 	}
 
-	function guardarUsuario_create($usuario, $db){
-		//  echo "<pre>";
-		//  var_dump($db);
-		//  echo "</pre>";
-		//  exit;
-		$stmt = $db->prepare("INSERT INTO user (username,email,password,act,id_perfil) VALUES(:username,:email,:password,:act,:perfil)");
+	function guardarUsuario($usuario){
+		$usuarioFinal = json_encode($usuario);
 
-		$stmt->bindValue(':username',$usuario['codigo'], PDO::PARAM_STR);
-		$stmt->bindValue(':email',$usuario['email'], PDO::PARAM_STR);
-		$stmt->bindValue(':password',$usuario['password'], PDO::PARAM_STR);
-		$stmt->bindValue(':act',1, PDO::PARAM_INT);
-		$stmt->bindValue(':perfil',$usuario['nivel'], PDO::PARAM_STR);
+		file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
+	}
 
-		$stmt->execute();
-}
-	// 	$usuarioFinal = json_encode($usuario);
-	//
-	// 	file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
-	// }
-	//
-	// function enviarALaFelicidad(){
-	// 	header('location: felicidad.php'); exit;
-	// }
+	function enviarAAltaOk(){
+		header('location: altaOk.php'); exit;
+	}
 ?>

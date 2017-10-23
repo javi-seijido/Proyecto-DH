@@ -1,5 +1,5 @@
 <?php
-
+require_once('control_session.php');
 require_once('funciones_reg.php');
 
 $localidades = [
@@ -78,23 +78,21 @@ if ($_POST) {
 
 ?>
 
-
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Registro de Personal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-		<link rel="stylesheet" href="../css/normalize.css">
-    <link href="../css/styles_reg.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style_menu.css">
-
-  </head>
-  <body>
+<head>
+	<meta charset="UTF-8">
+	<title>Registro de Personal</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link href="../css/styles_reg.css" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style_menu.css">
+</head>
+<body>
     <?php
-        require 'control_session.php';
+
         require 'menu_cabecera.php';
 
     ?>

@@ -1,5 +1,5 @@
 <?php
-	function validarUsuario($data){
+	function validarUsuario_create($data){
 		$errores = [];
 
 		if (trim($data['codigo']) == '') {

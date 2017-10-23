@@ -1,6 +1,6 @@
 <?php
-  require('conexion.php');
-	require('func.php');
+	require_once('control_session.php');
+	require_once('func.php');
 
 	$nivel = [
 		'A'=> 'Administrador',
@@ -9,59 +9,54 @@
 	];
 
 	$codigo = '';
-	$pass = '';
+	// $pass = '';
+	// $verpass = '';
 	$email = '';
 
 	if ($_POST) {
-
 
 		// Validación
 		$erroresFinales = validarUsuario_create($_POST);
 
 		$codigo = $_POST['codigo'];
-		$pass = $_POST['pass'];
+		// $pass = $_POST['pass'];
+		// $verpass = $_POST['pass'];
 		$email = $_POST['email'];
 
 
 		if (empty($erroresFinales)) {
 			// Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-
-			$usuarioAGuardar = crearUsuario_create($_POST);
+			$usuarioAGuardar = crearUsuario($_POST);
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-			guardarUsuario_create($usuarioAGuardar, $db);
-
-			// Ok guardado
-			// enviarALaFelicidad();
+			guardarUsuario($usuarioAGuardar);
 		}
-
 	}
 
 ?>
 
-﻿<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Alta de Usuarios</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-		<link rel="stylesheet" href="../css/normalize.css">
-		    	<link rel="stylesheet" href="../css/style_menu.css">
-    <link href="../css/styles_user.css" rel="stylesheet">
+<head>
+	<meta charset="UTF-8">
+	<title>Alta de Usuarios</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+	<link href="../css/styles_user.css" rel="stylesheet">
+	<link href="../css/style_menu.css" rel="stylesheet">
+</head>
+<body>
+		<?php require_once ('menu_cabecera.php');?>
 
-  </head>
-  <body>
-		<?php
-				require 'control_session.php';
-				require 'menu_cabecera.php';
-
-		?>
+				<div class="container">
+					<h1>Alta de Usuarios</h1>
+				</div>
 
 
-        <h1 align="center">Alta de Usuarios</h1>
-        <br><br><br>
+        <br><br>
 
         <div class="container">
 
@@ -69,28 +64,68 @@
 
                   <section class="datos_personales">
 
-                            <img class="foto_perfil" src="images/bombero.jpg" alt="foto_perfil">
-                            <br><br><br>
+                            <img class="foto_perfil" src="../images/sin_perfil2.png" alt="foto_perfil">
+
+														<input type="file" name="avatar" style="display:none;" id="botonFileReal">
+
+		                        <input class="input-file" type="button" value="Subir Foto" onclick="document.getElementById('botonFileReal').click();" style="">
+
+
+	                          <?php if (isset($erroresFinales['imagen'])): ?>
+	                          <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+	                          <span class="span_error"><?=$erroresFinales['imagen'];?></span>
+	                        <?php endif; ?>
 
                   </section>
 
                     <section class="datos_personales">
                             <label class="label_usr" for="codigo">Código Usuario:</label>
                             <input class="us_campo"type="text" name="codigo"  value="<?=$codigo;?>">
+														<?php if (isset($erroresFinales['codigo'])): ?>
+                      				<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                      				<span class="span_error"><?=$erroresFinales['codigo'];?></span>
+                      			<?php endif; ?>
+
                             <br><br><br>
 
 
                             <label class="label_usr" for="nombre">Contraseña:</label>
-                            <input class="us_campo"type="password" name="pass" value="<?=$pass;?>">
+                            <input class="us_campo"type="password" name="pass">
+														<?php if (isset($erroresFinales['pass'])): ?>
+                      				<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                      				<span class="span_error"><?=$erroresFinales['pass'];?></span>
+                      			<?php endif; ?>
                             <br><br><br>
 
-                            <label class="label_usr" for="correo">email:</label> value="<?=$email;?>"
+														<label class="label_usr" for="nombre">Verificar Contraseña:</label>
+                            <input class="us_campo"type="password" name="repass">
+														<?php if (isset($erroresFinales['repass'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['repass'];?></span>
+														<?php endif; ?>
+                            <br><br><br>
+
+
+
+                            <!-- <label class="label_usr" for="correo">email:</label> value="<?=$email;?>"
                             <input class="us_campo"type="text" name="email" value="<?=$email;?>">
+														<?php if (isset($erroresFinales['email'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['email'];?></span>
+														<?php endif; ?> -->
+
+														<label class="label_usr" for="email">Correo electrónico:</label>
+														<input class="us_campo" type="text" name="email" value="<?=$email?>">
+														<?php if (isset($erroresFinales['email'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['email'];?></span>
+														<?php endif; ?><br><br>
+
                             <br><br><br>
 
-                            <label class="label_usr">Nivel:</label>
-														<select name="nivel">
-															<option value="">Definir Nivel</option>
+                            <label class="label_nivel">Nivel:</label>
+														<select class="boton_nivel" name="nivel">
+															<option  value="">Definir Nivel</option>
 															<?php foreach ($nivel as $letra => $valor): ?>
 																<?php if (isset($_POST['nivel']) && $letra == $_POST['nivel']): ?>
 																	<option selected value="<?=$letra;?>"><?=$valor;?></option>
@@ -100,17 +135,18 @@
 															<?php endforeach; ?>
 														</select>
 														<?php if (isset($erroresFinales['nivel'])): ?>
-															<span style="color: red;"><?=$erroresFinales['determinar nivel'];?></span>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
 														<?php endif; ?>
-                            <br><br><br>
+														<label>Activo</label>
+														<input class="check" type="checkbox" name="habilitado" checked value="checked"><br><br>
 
-                            <div class="">
+                            <div class="botonera">
 
-                              <button class="boton" type="submit">Crear</button>
-                              <button class="boton" type="submit">Buscar</button>
-                              <button class="boton" type="submit">Modificar</button>
-                              <label>Activo</label>
-                              <input class="check" type="checkbox" name="habilitado" checked value="checked">
+                              <button class="input" type="submit">Crear</button>
+                              <button class="input" type="submit">Buscar</button>
+                              <button class="input" type="submit">Modificar</button>
+
 
                             </div>
                   </section>
