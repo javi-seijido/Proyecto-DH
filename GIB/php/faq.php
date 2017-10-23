@@ -4,12 +4,17 @@
 		<meta charset="utf-8">
 		<title>Preguntas Frecuentes</title>
 		<link rel="stylesheet" href="../css/styles_alt.css">
-	 	<meta name="viewport" content="width=device-width, initial-scale=1"
+		<link rel="stylesheet" href="../css/style_menu.css">
+	 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 
 	</head>
 	<body>
+    <?php
+		    require 'control_session.php';
+		    require 'menu_cabecera.php';
 
+		?>
 		<div class="principal">
 			<h1 class="maintitle">Instructivo de Procedimientos</h1>
 		</div>
