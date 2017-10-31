@@ -1,4 +1,4 @@
-*{
+rgb(255, 255, 255)*{
   box-sizing: border-box;
 }
 
@@ -12,6 +12,15 @@ body{
   font-size: 10px;
   height: 100vh;
 
+}
+
+.nav_list_browser{
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100px;
+}
+
+.titulo_browser{
+  display: inline;
 }
 
 .container{
