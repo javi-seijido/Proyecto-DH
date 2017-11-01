@@ -196,7 +196,7 @@ if ($_POST) {
             $db->rollBack();
             echo 'El error fue->'.$e->getMessage();
           }
-           echo 'Las tablas se crearon con exito.';
+
 
      } else {
        $usuarios = traerTodos();
@@ -218,6 +218,29 @@ if ($_POST) {
          $query=$db->prepare('INSERT INTO perfil (name) VALUES ("Administrador");');
          $query->execute();
 
+         $query=$db->prepare('INSERT INTO ranks (name) VALUES ("BOMBEROS");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO ranks (name) VALUES ("JEFE DE CUERPO");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO ranks (name) VALUES ("OFICIALES");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO ranks (name) VALUES ("SUB JEFE DE CUERPO");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO ranks (name) VALUES ("SUB OFICIALES");');
+         $query->execute();
+
+         $query=$db->prepare('INSERT INTO location (name) VALUES ("AVELLANEDA");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO location (name) VALUES ("SARANDI");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO location (name) VALUES ("VILLA DOMINICO");');
+         $query->execute();
+         $query=$db->prepare('INSERT INTO location (name) VALUES ("WILDE");');
+         $query->execute();
+
+         $query=$db->prepare('INSERT INTO street (name,num_from,num_to,state,location_id) VALUES ("AV MITRE","0","3000","BUENOS AIRES","1");');
+         $query->execute();
+
          $stmt=$db->prepare("
           INSERT INTO user (username,email,password,act,perfil_id)
           VALUES (:username,:email,:password,:act,:perfil_id);
@@ -230,13 +253,14 @@ if ($_POST) {
          $stmt->bindValue(":perfil_id",$usuarios[0]['nivel'],PDO::PARAM_INT);
          $stmt->execute();
 
+          header('Location: index.php'); exit;
 
        }catch( PDOException $e ){
               echo 'El error fue->'.$e->getMessage();
        }
      }
    }
-   header('Location: index.php'); exit;
+
 }
 
  ?>
