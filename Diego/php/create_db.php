@@ -32,7 +32,6 @@ if ($_POST) {
        $db->rollBack();
        echo 'El error fue->'.$e->getMessage();
      }
-     echo 'La BD se creo con exito.';
 
    } else {
         if (isset($_POST["cr_tb"])) {
@@ -164,29 +163,32 @@ if ($_POST) {
           try {
 
               $db->query('CREATE TABLE personal (
-                id int(11) NOT NULL AUTO_INCREMENT,
-                name varchar(45) NOT NULL,
-                lastname varchar(45) NOT NULL,
-                age tinyint(2) NOT NULL,
-                gender varchar(45) NOT NULL,
-                date_age date NOT NULL,
-                dni varchar(8) NOT NULL,
-                movil_phone varchar(10) NOT NULL,
-                email varchar(100) NOT NULL,
-                number_street int(11) NOT NULL DEFAULT 0,
-                date_start date NOT NULL,
-                date_end date NOT NULL,
-                info varchar(255) DEFAULT NULL,
-                rank_id int(11) NOT NULL,
-                street_id int(11) NOT NULL,
-                PRIMARY KEY (id),
-                UNIQUE KEY dni_UNIQUE (dni),
-                UNIQUE KEY email_UNIQUE (email),
-                KEY fk_personal_rank_idx (rank_id),
-                KEY fk_personal_street1_idx (street_id),
-                CONSTRAINT fk_personal_rank FOREIGN KEY (rank_id) REFERENCES ranks (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-          CONSTRAINT fk_personal_street1 FOREIGN KEY (street_id) REFERENCES street (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-             ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
+                          id int(11) NOT NULL AUTO_INCREMENT,
+                          name varchar(45) NOT NULL,
+                          lastname varchar(45) NOT NULL,
+                          age tinyint(2) NOT NULL,
+                          gender varchar(45) NOT NULL,
+                          date_age date NOT NULL,
+                          dni varchar(8) NOT NULL,
+                          movil_phone varchar(10) NOT NULL,
+                          email varchar(100) NOT NULL,
+                          number_street int(11) NOT NULL DEFAULT 0,
+                          date_start date NOT NULL,
+                          date_end date NOT NULL,
+                          info varchar(255) DEFAULT NULL,
+                          rank_id int(11) NOT NULL,
+                          street_id int(11) NOT NULL,
+                          location_id int(11) NOT NULL,
+                          PRIMARY KEY (id),
+                          UNIQUE KEY dni_UNIQUE (dni),
+                          UNIQUE KEY email_UNIQUE (email),
+                          KEY fk_personal_rank_idx (rank_id),
+                          KEY fk_personal_street1_idx (street_id),
+                          KEY fk_personal_location1_idx (location_id),
+                          CONSTRAINT fk_personal_rank FOREIGN KEY (rank_id) REFERENCES ranks (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                          CONSTRAINT fk_personal_street1 FOREIGN KEY (street_id) REFERENCES street (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
+                          CONSTRAINT fk_personal_location1 FOREIGN KEY (location_id) REFERENCES location (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+                        ) ENGINE=InnoDB DEFAULT CHARSET=latin1;');
 
             $db->commit();
 
@@ -195,10 +197,6 @@ if ($_POST) {
             echo 'El error fue->'.$e->getMessage();
           }
            echo 'Las tablas se crearon con exito.';
-
-
-
-
 
      } else {
        $usuarios = traerTodos();
@@ -236,11 +234,9 @@ if ($_POST) {
        }catch( PDOException $e ){
               echo 'El error fue->'.$e->getMessage();
        }
-
-
-         echo "Migro los datos";
      }
    }
+   header('Location: index.php'); exit;
 }
 
  ?>
@@ -258,7 +254,7 @@ if ($_POST) {
  	</head>
  	<body>
         <form class= "loguin_border" action="" method="post">
-
+            <h3>Creacion de Base de Datos.</h3>
           <button class="input" type="submit" name="cr_db"> Crear DB</button>
           <button class="input" type="submit" name="cr_tb"> Crear Tablas</button>
           <button class="input" type="submit" name="mg"> Migrar Datos</button>
