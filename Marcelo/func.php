@@ -1,5 +1,5 @@
 <?php
-	function validarUsuario($data){
+	function validarUsuario_create($data){
 		$errores = [];
 
 		if (trim($data['codigo']) == '') {
@@ -7,7 +7,7 @@
 		}
 
 		if (trim($data['pass']) == '') {
-			$errores['pass'] = 'Ingresar contraseña';
+			$errores['pass'] = 'ingresar contraseña';
 		}
 
 		if (trim($data['repass']) == '') {
@@ -17,21 +17,19 @@
 		}
 
 		if (trim($data['email']) == '') {
-			$errores['email'] = 'Ingresar e-mail!';
+			$errores['email'] = 'ingresar email!';
 		} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-			$errores['email'] = 'e-mail invalido!';
+			$errores['email'] = 'El email ES INVALIDO!';
 		}
 
 		if (trim($data['nivel']) == '') {
-			$errores['nivel'] = 'Determinar Nivel';
+			$errores['nivel'] = 'Definir nivel';
 		}
-
-
 
 		return $errores;
 	}
 
-	function crearUsuario($usuario){
+	function crearUsuario_create($usuario){
 		$usuarioFinal = [
 			'codigo' => $usuario['codigo'],
 			'password' => password_hash($usuario['pass'], PASSWORD_DEFAULT),
@@ -42,13 +40,28 @@
 		return $usuarioFinal;
 	}
 
-	function guardarUsuario($usuario){
-		$usuarioFinal = json_encode($usuario);
+	function guardarUsuario_create($usuario, $db){
+		//  echo "<pre>";
+		//  var_dump($db);
+		//  echo "</pre>";
+		//  exit;
+		$stmt = $db->prepare("INSERT INTO user (username,email,password,act,id_perfil) VALUES(:username,:email,:password,:act,:perfil)");
 
-		file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
-	}
+		$stmt->bindValue(':username',$usuario['codigo'], PDO::PARAM_STR);
+		$stmt->bindValue(':email',$usuario['email'], PDO::PARAM_STR);
+		$stmt->bindValue(':password',$usuario['password'], PDO::PARAM_STR);
+		$stmt->bindValue(':act',1, PDO::PARAM_INT);
+		$stmt->bindValue(':perfil',$usuario['nivel'], PDO::PARAM_STR);
 
+		$stmt->execute();
+}
+	// 	$usuarioFinal = json_encode($usuario);
+	//
+	// 	file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
+	// }
+	//
 	function enviarAAltaOk(){
 		header('location: altaOk.php'); exit;
 	}
+
 ?>

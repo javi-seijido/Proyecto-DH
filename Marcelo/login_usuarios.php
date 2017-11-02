@@ -1,5 +1,5 @@
 <?php
-	session_start();
+	require_once('control_session.php');
 	require_once('func.php');
 
 	$nivel = [
@@ -16,7 +16,7 @@
 	if ($_POST) {
 
 		// Validación
-		$erroresFinales = validarUsuario($_POST);
+		$erroresFinales = validarUsuario_create($_POST);
 
 		$codigo = $_POST['codigo'];
 		// $pass = $_POST['pass'];
@@ -30,37 +30,33 @@
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
 			guardarUsuario($usuarioAGuardar);
-
-
-
-
 		}
-
 	}
 
 ?>
 
-﻿<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Alta de Usuarios</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-		<link rel="stylesheet" href="../css/normalize.css">
-    <link href="../css/styles_user.css" rel="stylesheet">
-		<link href="../css/style_menu.css" rel="stylesheet">
 
-  </head>
-  <body>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Alta de Usuarios</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+	<link href="../css/styles_user.css" rel="stylesheet">
+	<link href="../css/style_menu.css" rel="stylesheet">
+</head>
+<body>
+		<?php require_once ('menu_cabecera.php');?>
 
 				<div class="container">
 					<h1>Alta de Usuarios</h1>
 				</div>
 
 
-        <br><br>
+
 
         <div class="container">
 
@@ -70,12 +66,15 @@
 
                             <img class="foto_perfil" src="../images/sin_perfil2.png" alt="foto_perfil">
 
-														<input class="botonimg" type="file" name="avatar" multiple>
-														<?php if (isset($erroresFinales['imagen'])): ?>
-															<span style="color: red;"><i class="ion-ios-close"></i></span>
-															<span style="color: red;"><?=$erroresFinales['imagen'];?></span>
-														<?php endif; ?>
-                            <br><br><br>
+														<input type="file" name="avatar" style="display:none;" id="botonFileReal">
+
+		                        <input class="input-file" type="button" value="Subir Foto" onclick="document.getElementById('botonFileReal').click();" style="">
+
+
+	                          <?php if (isset($erroresFinales['imagen'])): ?>
+	                          <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+	                          <span class="span_error"><?=$erroresFinales['imagen'];?></span>
+	                        <?php endif; ?>
 
                   </section>
 
@@ -122,7 +121,7 @@
 															<span class="span_error"><?=$erroresFinales['email'];?></span>
 														<?php endif; ?><br><br>
 
-                            <br><br><br>
+                            <br><br>
 
                             <label class="label_nivel">Nivel:</label>
 														<select class="boton_nivel" name="nivel">
@@ -138,16 +137,16 @@
 														<?php if (isset($erroresFinales['nivel'])): ?>
 															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
 															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
-														<?php endif; ?><br><br>
-                            <br><br>
+														<?php endif; ?>
+														<label class="activo">Activo</label>
+														<input class="check" type="checkbox" name="habilitado" checked value="checked"><br><br>
 
                             <div class="botonera">
 
-                              <button class="boton" type="submit">Crear</button>
-                              <button class="boton" type="submit">Buscar</button>
-                              <button class="boton" type="submit">Modificar</button>
-                              <label>Activo</label>
-                              <input class="check" type="checkbox" name="habilitado" checked value="checked">
+                              <button class="input" type="submit">Crear</button>
+                              <button class="input" type="submit">Buscar</button>
+                              <button class="input" type="submit">Modificar</button>
+
 
                             </div>
                   </section>
