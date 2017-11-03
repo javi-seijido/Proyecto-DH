@@ -11,7 +11,7 @@ if ($_POST) {
     //  exit;
       $dsn = 'mysql:host=localhost;';
       $db_user = 'root';
-      $db_pass = '';
+      $db_pass = 'root';
       $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
      try {
          	$db = new PDO($dsn, $db_user, $db_pass, $opciones);
@@ -37,7 +37,7 @@ if ($_POST) {
         if (isset($_POST["cr_tb"])) {
           $dsn = 'mysql:host=localhost;dbname=gib;';
           $db_user = 'root';
-          $db_pass = '';
+          $db_pass = 'root';
           $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
 
           try {
@@ -203,7 +203,7 @@ if ($_POST) {
 
        $dsn = 'mysql:host=localhost;dbname=gib;';
        $db_user = 'root';
-       $db_pass = '';
+       $db_pass = 'root';
        $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
 
        try {

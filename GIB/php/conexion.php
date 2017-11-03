@@ -1,8 +1,8 @@
 <?php
-      $dsn = 'mysql:host=192.168.10.42;dbname=gib;
+      $dsn = 'mysql:host=localhost;dbname=gib;
       charset=utf8mb4;port:3306';
       $db_user = 'root';
-      $db_pass = '1111';
+      $db_pass = 'root';
 
       try {
         $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
