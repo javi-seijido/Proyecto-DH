@@ -1,5 +1,5 @@
 <?php
-
+// require('conexion.php');
 	function validarFecha($fecha)
 	{
 		$valores = [];
@@ -12,8 +12,17 @@
 				return true;
 	}
 
+		function convertirFecha_us($fecha_sp)
 
-	function validarPersonal($data){
+		{
+			$date = new DateTime($fecha_sp);
+			$resultado = $date->format('Y-m-d');
+			return $resultado;
+		}
+
+
+
+	function validarPersonal($data,$db){
 		$errores = [];
 
 
@@ -67,13 +76,13 @@
 		$errores['email'] = 'Ingrese Email.!';
 	} elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
 		$errores['email'] = 'Formato Erroneo..!';
-	} elseif (comprobarEmail($data['email']) != false) {
+	} elseif (comprobarEmail($data['email'], $db) == 1) {
 		$errores['email'] = 'El Email ya Existe';
 	}
 
 
-	if (trim($data['dir_calle']) == '') {
-		$errores['dir_calle'] = 'Ingrese la Calle';
+	if (trim($data['calle']) == '') {
+		$errores['calle'] = 'Ingrese la Calle';
 	}
 
 	if (trim($data['num_calle']) == '') {
@@ -106,15 +115,15 @@
 
 								}
 
-			if (trim($data['fbaja']) == '') {
-					$errores['fbaja'] = 'Ingrese una Fecha.!';
-				} else {
+			// if (trim($data['fbaja']) == '') {
+			// 		$errores['fbaja'] = 'Ingrese una Fecha.!';
+			// 	} else {
 								if (!validarFecha($data['fbaja'])) {
 									$errores['fbaja'] = 'Formato Erroneo.!';
 								}
 
 
-								}
+								// }
 
 
 		return $errores;
@@ -122,21 +131,22 @@
 
 	function crearUsuario($datos){
 		$usuarioFinal = [
-			'id' => generarId(),
+			// 'id' => generarId(),
 			'nombre' => $datos['nombre'],
 			'apellido' => $datos['apellido'],
 			'edad' => $datos['edad'],
 			'genero' => $datos['genero'],
-			'fnacimiento' =>	$datos['fnacimiento'],
+			'fnacimiento' =>	convertirFecha_us($datos['fnacimiento']),
+			// 'fnacimiento' =>	$datos['fnacimiento'],
 			'dni' => $datos['dni'],
 			'telefonomovil' => $datos['telefonomovil'],
 			'email' => $datos['email'],
-			'dir_calle' => $datos['dir_calle'],
+			'calle' => $datos['calle'],
 			'num_calle' => $datos['num_calle'],
 			'localidad' => $datos['localidad'],
 			'escalafon' => $datos['escalafon'],
-			'falta' => $datos['falta'],
-			'fbaja' => $datos['fbaja'],
+			'falta' => convertirFecha_us($datos['falta']),
+			'fbaja' => convertirFecha_us($datos['fbaja']),
 			'genero' => $datos['genero'],
 			'info' => $datos['info']
 
@@ -184,27 +194,80 @@
 		return $id + 1;
 	}
 
-	function comprobarEmail ($mail){
-		// Traigo todos los usuario
-		$usuarios = cargarJson();
+	function comprobarEmail ($email, $db){
 
-		// Recorro ese array
-		foreach ($usuarios as $unUsuario) {
-			// Si el mail del usuario en el array es igual al que me llegó por POST, devuelvo al usuario
-			if ($unUsuario['email'] == $mail) {
-				return $unUsuario;
-			}
-		}
 
-		return false;
+	$query = $db->prepare("SELECT count(*) as cantidad
+	  FROM personal
+
+	  WHERE email LIKE :busqueda
+
+	  ");
+
+
+	$query->bindValue(':busqueda', '%'.$email.'%', PDO::PARAM_STR);
+	$query->execute();
+	$resul_cant = $query->fetch(PDO::FETCH_ASSOC);
+
+	$numero=intval ($resul_cant['cantidad']);
+	// echo "<pre>";
+	// var_dump($numero);
+	// echo "<pre>";
+	// exit;
+	return $numero;
 	}
 
-	function guardarUsuario($usuario){
+	// function comprobarEmail ($mail){
+	// 	// Traigo todos los usuario
+	// 	$usuarios = cargarJson();
+	//
+	// 	// Recorro ese array
+	// 	foreach ($usuarios as $unUsuario) {
+	// 		// Si el mail del usuario en el array es igual al que me llegó por POST, devuelvo al usuario
+	// 		if ($unUsuario['email'] == $mail) {
+	// 			return $unUsuario;
+	// 		}
+	// 	}
+	//
+	// 	return false;
+	// }
 
-		$usuarioFinal = json_encode($usuario);
+	function guardarUsuario($usuario, $db){
+	//  echo "<pre>";
+	//  var_dump($usuario);
+	//  echo "</pre>";
+	//  exit;
+	$stmt = $db->prepare("INSERT INTO personal (name,lastname,age,gender,date_age,dni,movil_phone,email,number_street,date_start,date_end,info,rank_id,location_id,street_id) VALUES(:name,:lastname,:age,:gender,:date_age,:dni,:movil_phone,:email,:number_street,:date_start,:date_end,:info,:rank_id,:location_id,:street_id)");
 
-		file_put_contents('../json/usuarios_personal.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
-	}
+	$stmt->bindValue(':name',$usuario['nombre'], PDO::PARAM_STR);
+	$stmt->bindValue(':lastname',$usuario['apellido'], PDO::PARAM_STR);
+	$stmt->bindValue(':age',$usuario['edad'], PDO::PARAM_INT);
+	$stmt->bindValue(':gender',$usuario['genero'], PDO::PARAM_STR);
+	$stmt->bindValue('date_age',$usuario['fnacimiento'], PDO::PARAM_STR);
+	$stmt->bindValue(':dni',$usuario['dni'], PDO::PARAM_STR);
+	$stmt->bindValue(':movil_phone',$usuario['telefonomovil'], PDO::PARAM_STR);
+	$stmt->bindValue(':email',$usuario['email'], PDO::PARAM_STR);
+	$stmt->bindValue(':number_street',$usuario['num_calle'], PDO::PARAM_INT);
+	$stmt->bindValue(':date_start',$usuario['falta'], PDO::PARAM_STR);
+	$stmt->bindValue(':date_end',$usuario['fbaja'], PDO::PARAM_STR);
+	$stmt->bindValue(':info',$usuario['info'], PDO::PARAM_STR);
+	$stmt->bindValue(':rank_id',$usuario['escalafon'], PDO::PARAM_INT);
+	$stmt->bindValue(':location_id',$usuario['localidad'], PDO::PARAM_INT);
+	$stmt->bindValue(':street_id',$usuario['calle'], PDO::PARAM_INT);
+
+	$stmt->execute();
+}
+
+
+
+
+
+	// function guardarUsuario($usuario){
+	//
+	// 	$usuarioFinal = json_encode($usuario);
+	//
+	// 	file_put_contents('../json/usuarios_personal.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
+	// }
 
 	// Recibe dos parámetros, el nombre el input de la imagen y el array de errores
 	function guardarImagen($laImagen, $errores){
