@@ -9,7 +9,7 @@ if ($_POST) {
     //  var_dump($_POST);
     //  echo "</pre>";
     //  exit;
-      $dsn = 'mysql:host=10.20.42.110;';
+      $dsn = 'mysql:host=10.20.42.102;';
       $db_user = 'root';
       $db_pass = '1111';
       $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
@@ -35,7 +35,7 @@ if ($_POST) {
 
    } else {
         if (isset($_POST["cr_tb"])) {
-          $dsn = 'mysql:host=10.20.42.110;dbname=gib;';
+          $dsn = 'mysql:host=10.20.42.102;dbname=gib;';
           $db_user = 'root';
           $db_pass = '1111';
           $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
@@ -201,7 +201,7 @@ if ($_POST) {
      } else {
        $usuarios = traerTodos();
 
-       $dsn = 'mysql:host=10.20.42.110;dbname=gib;';
+       $dsn = 'mysql:host=10.20.42.102;dbname=gib;';
        $db_user = 'root';
        $db_pass = '1111';
        $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );

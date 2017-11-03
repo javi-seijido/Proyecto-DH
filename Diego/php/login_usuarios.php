@@ -3,22 +3,10 @@
 	require_once('func.php');
 	require_once('conexion.php');
 
-
-//---------------------Carga de browser------------------------------------//
-  require_once('master_browser.php');
-  $param_table = 'user';
-
-	$list_browser= stmt_list_browser($param_table, $db);
-	//  echo "<pre>";
-	//  var_dump($list_browser);
-	//  echo "</pre>";
-	//  exit;
-//-------------------------------------------------------------------------//
-
 	$nivel = [
-		'A'=> 'Administrador',
-		'B'=> 'Perfil 1',
-		'C'=> 'Perfil 2'
+		'1'=> 'Administrador',
+		'2'=> 'Perfil 1',
+		'3'=> 'Perfil 2'
 	];
 
 	$codigo = '';
@@ -39,10 +27,10 @@
 
 		if (empty($erroresFinales)) {
 			// Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-			$usuarioAGuardar = crearUsuario($_POST);
+			$usuarioAGuardar = crearUsuario_create($_POST);
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-			guardarUsuario($usuarioAGuardar);
+			guardarUsuario_create($usuarioAGuardar,$db);
 		}
 	}
 
@@ -62,19 +50,120 @@
 	<link href="../css/style_menu.css" rel="stylesheet">
 </head>
 <body>
-  <?php require_once ('menu_cabecera.php'); ?>
-  <h5>Listado de Usuarios:</h5>
-  <ol>
-  	<li class="titulo_browser">ID</li>
-		<li class="titulo_browser">NAME</li>
-  </ol>
-	<nav class="nav_list_browser">
-		<ol>
-			<?php foreach ($list_browser as $value) { ?>
-					<li><a href="#"><?= $value['id']. '    -    '. $value['username']; ?></a></li>
-			<?php } ?>
-		</ol>
-	</nav>
+		<?php require_once ('menu_cabecera.php');?>
+
+				<div class="container">
+					<h1>Alta de Usuarios</h1>
+				</div>
+
+
+
+
+        <div class="container">
+
+                <form class="personal_border" method="post">
+
+                  <section class="datos_personales">
+
+                            <img class="foto_perfil" src="../images/sin_perfil2.png" alt="foto_perfil">
+
+														<input type="file" name="avatar" style="display:none;" id="botonFileReal">
+
+		                        <input class="input-file" type="button" value="Subir Foto" onclick="document.getElementById('botonFileReal').click();" style="">
+
+
+	                          <?php if (isset($erroresFinales['imagen'])): ?>
+	                          <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+	                          <span class="span_error"><?=$erroresFinales['imagen'];?></span>
+	                        <?php endif; ?>
+
+                  </section>
+
+                    <section class="datos_personales">
+                            <label class="label_usr" for="codigo">Código Usuario:</label>
+                            <input class="us_campo"type="text" name="codigo"  value="<?=$codigo;?>">
+														<?php if (isset($erroresFinales['codigo'])): ?>
+                      				<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                      				<span class="span_error"><?=$erroresFinales['codigo'];?></span>
+                      			<?php endif; ?>
+
+                            <br><br><br>
+
+
+                            <label class="label_usr" for="nombre">Contraseña:</label>
+                            <input class="us_campo"type="password" name="pass">
+														<?php if (isset($erroresFinales['pass'])): ?>
+                      				<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                      				<span class="span_error"><?=$erroresFinales['pass'];?></span>
+                      			<?php endif; ?>
+                            <br><br><br>
+
+														<label class="label_usr" for="nombre">Verificar Contraseña:</label>
+                            <input class="us_campo"type="password" name="repass">
+														<?php if (isset($erroresFinales['repass'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['repass'];?></span>
+														<?php endif; ?>
+                            <br><br><br>
+
+
+
+                            <!-- <label class="label_usr" for="correo">email:</label> value="<?=$email;?>"
+                            <input class="us_campo"type="text" name="email" value="<?=$email;?>">
+														<?php if (isset($erroresFinales['email'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['email'];?></span>
+														<?php endif; ?> -->
+
+														<label class="label_usr" for="email">Correo electrónico:</label>
+														<input class="us_campo" type="text" name="email" value="<?=$email?>">
+														<?php if (isset($erroresFinales['email'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['email'];?></span>
+														<?php endif; ?><br><br>
+
+                            <br><br>
+
+                            <label class="label_nivel">Nivel:</label>
+														<select class="boton_nivel" name="nivel">
+															<option  value="">Definir Nivel</option>
+															<?php foreach ($nivel as $letra => $valor): ?>
+																<?php if (isset($_POST['nivel']) && $letra == $_POST['nivel']): ?>
+																	<option selected value="<?=$letra;?>"><?=$valor;?></option>
+																<?php else: ?>
+																	<option value="<?=$letra;?>"><?=$valor;?></option>
+																<?php endif; ?>
+															<?php endforeach; ?>
+														</select>
+														<?php if (isset($erroresFinales['nivel'])): ?>
+															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
+														<?php endif; ?>
+														<label class="activo">Activo</label>
+														<input class="check" type="checkbox" name="habilitado" checked><br><br>
+
+                            <div class="botonera">
+
+                              <button class="input" type="submit">Crear</button>
+                              <button class="input" type="submit">Buscar</button>
+                              <button class="input" type="submit">Modificar</button>
+
+
+                            </div>
+                  </section>
+
+                </form>
+
+    </div>
+      <footer class="footer_reg">
+
+          <a href="main_menu.php">
+              <img class="volver_logo" src="../images/volver.png">
+
+          </a>
+
+      </footer>
+
 
 
   </body>
