@@ -1,6 +1,7 @@
 <?php
   session_start();
 
+  require('conexion.php');
   require_once('funciones_log.php');
 
 
@@ -66,11 +67,11 @@
     if (empty($errores_finales)){
 
        $usr_selec = $_POST["usr"];
-       $todo = $_POST;
+      //  $todo = $_POST;
 
-       $usr_ok = comprobarUsuario($usr_selec,$todo);
+       $usr_ok = comprobarUsuario($usr_selec,$db);
 
-       if (empty($usr_ok)) {
+       if (!isset($usr_ok)) {
          $errores_finales['er_usr'] =  'Usuario Erroneo';
        } else {
            if (!password_verify($_POST["pass"], $usr_ok["password"])) {
@@ -129,7 +130,7 @@
 					if (isset($errores_finales['er_usr'])):
 					?>
 					 <div class="">
-						 <span class="error_usr" >.</span>
+						 <img class="error_usr" src="../images/logo_errores.png" alt="">
 					 </div>
 					<?php endif; ?> <br><br>
 
@@ -141,7 +142,7 @@
 						if (isset($errores_finales['er_pass'])):
 						?>
 						 <div class="div_err_pass">
-               <span class="error_pass" >.</span>
+               <img class="error_pass" src="../images/logo_errores.png" alt="">
       		   </div>
 						<?php endif; ?>
 
@@ -163,8 +164,9 @@
     <?php
       if (!empty($errores_finales)): ?>
         <div class="err_border">
+               <br>
                <?php foreach ($errores_finales as $value) { ?>
-                 <span class="men_er_usr_360" ><?=$value;?></span><br><br>
+                 <img src="../images/logo_errores.png" alt=""><span class="men_er_usr_360" > <?=' - '.$value;?></span><br><br>
                <?php } ?>
         </div>
     <?php endif; ?> <br>
