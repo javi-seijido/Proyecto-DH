@@ -6,16 +6,12 @@ require_once('funciones_log.php');
 if(!estaLogueado()){
    header('Location: index.php'); exit;
 }
-// echo "<pre>";
-// var_dump($_SESSION);
-// echo "</pre>";
+
 $usrname = $_SESSION['name'];
 
 $images = glob('../avatares/' . $_SESSION['email'] . '*');
 
 ?>
-
-
 
 <!doctype html>
 <html>
@@ -31,20 +27,5 @@ $images = glob('../avatares/' . $_SESSION['email'] . '*');
 <body>
       <?php require 'menu_cabecera.php'; ?>
 
-
-
-      <!-- <script>
-        var boton = document.querySelector(".menu_logeado");
-        var contenedor = document.querySelector("#menu_usr_open");
-        var botonCerrar = document.querySelector("#cerrar_rec");
-
-        boton.onclick = function (){
-          contenedor.style.display = "block";
-        }
-
-        botonCerrar.onclick = function (){
-          contenedor.style.display = "none";
-        } -->
-
-      </body>
+</body>
 </html>

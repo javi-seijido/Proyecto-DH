@@ -1,22 +1,62 @@
 <?php
-
+require('conexion.php');
 require_once('funciones_reg.php');
 
-$localidades = [
-  'A' => 'Avellaneda',
-  'S' => 'Sarandi',
-  'V' => 'Villa Dominico',
-  'W' => 'Wilde'
+$query = $db->prepare("SELECT * FROM location");
 
-];
+$query->execute();
+$resul = $query->fetchall(PDO::PARAM_STR);
 
-$escalafones = [
-  'J' => 'Jefe de Cuerpo',
-  'SJ' => 'Sub Jefe de Cerpo',
-  'O' => 'Oficiales',
-  'SO' => 'Sub Oficiales',
-  'B' => 'Bomberos'
-];
+foreach ($resul as $a => $b) {
+  $localidades[$a+1]=$b['name'];
+}
+
+$query = $db->prepare("SELECT * FROM street");
+
+$query->execute();
+$resul = $query->fetchall(PDO::PARAM_STR);
+
+foreach ($resul as $a => $b) {
+  $dir_calle[$a+1]=$b['name'];
+}
+
+$query = $db->prepare("SELECT * FROM ranks");
+
+$query->execute();
+$resul = $query->fetchall(PDO::PARAM_STR);
+
+foreach ($resul as $a => $b) {
+  $escalafones[$a+1]=$b['name'];
+}
+
+ // echo "<pre>";
+ // var_dump($localidades);
+ // echo "</pre>";
+ // exit;
+
+// // $localidades = [
+// //   '1' => 'Avellaneda',
+// //   '2' => 'Sarandi',
+// //   '3' => 'Villa Dominico',
+// //   '4' => 'Wilde'
+//
+// ];
+
+// $escalafones = [
+//   '1' => 'Bomberos',
+//   '2' => 'Jefe de Cuerpo',
+//   '3' => 'Oficiales',
+//   '4' => 'Sub Jefe de Cerpo',
+//   '5' => 'Sub Oficiales'
+//   ];
+//
+//   $dir_calle = [
+//     '1' => 'AV MITRE',
+//     '2' => 'PRUDAN'
+//     ];
+
+
+
 
   $nombre = '';
   $apellido = '';
@@ -25,10 +65,9 @@ $escalafones = [
   $dni = '';
   $telefonomovil = '';
   $email = '';
-  $dir_calle = '';
   $num_calle = '';
   $falta = '';
-  $fbaja = '';
+  $fbaja = '01-01-2999';
 
 if ($_POST) {
 
@@ -40,7 +79,7 @@ if ($_POST) {
   $dni = $_POST['dni'];
   $telefonomovil = $_POST['telefonomovil'];
   $email = $_POST['email'];
-  $dir_calle = $_POST['dir_calle'];
+
   $num_calle = $_POST['num_calle'];
   $falta = $_POST['falta'];
   $fbaja = $_POST['fbaja'];
@@ -48,7 +87,7 @@ if ($_POST) {
   // $username = $_POST['username'];
 
   // Validación - La función validarUsuario retorna un array
-  $erroresFinales = validarPersonal($_POST);
+  $erroresFinales = validarPersonal($_POST,$db);
 
 
   if (empty($erroresFinales)) {
@@ -60,9 +99,10 @@ if ($_POST) {
     if (empty($erroresFinales)) {
       // Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
       $usuarioAGuardar = crearUsuario($_POST);
-
+      // var_dump($usuarioAGuardar);
+      // exit;
       // Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-      guardarUsuario($usuarioAGuardar);
+      guardarUsuario($usuarioAGuardar, $db);
 
 
 
@@ -79,19 +119,18 @@ if ($_POST) {
 ?>
 
 
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Registro de Personal</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
-		<link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-		<link rel="stylesheet" href="../css/normalize.css">
-    <link href="../css/styles_reg.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style_menu.css">
-
-  </head>
+<head>
+	<meta charset="UTF-8">
+	<title>Registro de Personal</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="../css/normalize.css">
+	<link href="../css/styles_reg.css" rel="stylesheet">
+	<link href="../css/style_menu.css" rel="stylesheet">
+</head>
   <body>
     <?php
         require 'control_session.php';
@@ -119,8 +158,8 @@ if ($_POST) {
 
 
                           <?php if (isset($erroresFinales['imagen'])): ?>
-                          <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
-                          <span class="span_error"><?=$erroresFinales['imagen'];?></span>
+                          <span style="color: red;"><img style="width: 8%;margin-left: 12%;" src="../images/icon_error.png"></span>
+                          <span style="margin-left: 3%;background-color: red;color: white;"><?=$erroresFinales['imagen'];?></span>
                         <?php endif; ?>
                   <!-- </section> -->
 
@@ -208,13 +247,23 @@ if ($_POST) {
 
                             <label class="label_usr">Direccion:</label>
                             <br><br>
+                            <label class="label_usr">Calle:</label>
+                            <select class="us_campo" name="calle">
+                              <option value="">Elegir</option>
+                              <?php foreach ($dir_calle as $letra => $valor): ?>
+                                <?php if (isset($_POST['calle']) && $_POST['calle'] == $letra): ?>
+                                  <option selected value="<?=$letra;?>"><?=$valor;?></option>
+                                <?php else: ?>
+                                  <option value="<?=$letra;?>"><?=$valor;?></option>
+                                <?php endif; ?>
+                              <?php endforeach; ?>
+                            </select>
+                            <?php if (isset($erroresFinales['calle'])): ?>
+                              <span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
+                              <span class="span_error"><?=$erroresFinales['calle'];?></span>
+                            <?php endif; ?>
+                            <br><br>
 
-                            <label class="label_usr" for="dir_calle">Calle: </label>
-                            <input class="us_campo"type="text" name="dir_calle" value="<?=$dir_calle;?>">
-                            <?php if (isset($erroresFinales['dir_calle'])): ?>
-                      				<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
-                      				<span class="span_error"><?=$erroresFinales['dir_calle'];?></span>
-                      			<?php endif; ?><br><br>
 
 
                             <label class="label_usr"for="num_calle">Calle Numero: </label>

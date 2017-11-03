@@ -60,7 +60,7 @@ function validarUsuario($data){
 //
 // }
 
-function traerTodos($data){
+function traerTodos(){
   // Obtengo el contenido del JSON
   $archivo = file_get_contents("../json/usuarios.json");
 
@@ -73,31 +73,52 @@ function traerTodos($data){
   // Creo un array vacio, para guardar los usuarios
   $usuariosFinal = [];
 
-  // Creo un array de usuarios geerado desde el json
+  // Creo un array de usuarios generado desde el json
   foreach ($usuariosJSON as $usuario) {
+
     $usuariosFinal[] = json_decode($usuario, true);
+
   }
+
   return $usuariosFinal;
 }
 
+function comprobarUsuario ($usr_selec,$db){
+  $stmt = $db->prepare("SELECT id, username, password, email, act FROM user WHERE username = :username");
+
+  $stmt->bindValue(':username',$usr_selec, PDO::PARAM_STR);
+
+  $stmt->execute();
+
+   $encontrado = $stmt->fetch(PDO::FETCH_ASSOC);
+  //  echo "<pre>";
+  //  var_dump(($encontrado);
+  //  echo "</pre>";
+ if (!empty($encontrado)) {
+   if ($encontrado['act'] == "1") {
+     return $encontrado;
+   }
+ }
+   return false;
+ }
 
 
 
 
-function comprobarUsuario ($usr_selec,$todo){
-  // Traigo todos los usuario
-  $usuarios = traerTodos($todo);
+  //
+  // // Traigo todos los usuario
+  // $usuarios = traerTodos($todo);
+  //
+  // $encontrado = [];
+  // // Recorro ese array
+  // foreach ($usuarios as $unUsuario) {
+  //   // Si el mail del usuario en el array es igual al que me llegó por POST, devuelvo al usuario
+  //   if ($unUsuario['name'] == $usr_selec) {
+  //     $encontrado = $unUsuario;
+  //   }
+  // }
 
-  $encontrado = [];
-  // Recorro ese array
-  foreach ($usuarios as $unUsuario) {
-    // Si el mail del usuario en el array es igual al que me llegó por POST, devuelvo al usuario
-    if ($unUsuario['name'] == $usr_selec) {
-      $encontrado = $unUsuario;
-    }
-  }
-  return $encontrado;
-}
+
 
 
 
@@ -111,7 +132,7 @@ function estaLogueado() {
 // FUNCION - guardar en cookie
 function guardar_cookie($usuario){
   setcookie('id',$usuario['id'], time()+3600, "/");
-  setcookie('name',$usuario['name'], time()+3600, "/");
+  setcookie('username',$usuario['username'], time()+3600, "/");
 
   // $_COOKIE['id'] = $usuario['id'];
   // $_COOKIE['name'] = $usuario['name'];
@@ -122,7 +143,7 @@ function guardar_cookie($usuario){
 function loguear($usuario) {
   // Guardo en $_SESSION el ID del USUARIO
    $_SESSION['id'] = $usuario['id'];
-   $_SESSION['name'] = $usuario['name'];
+   $_SESSION['name'] = $usuario['username'];
    $_SESSION['email'] = $usuario['email'];
    $_SESSION['date_log'] = date('Y/m/d');
 
