@@ -146,9 +146,9 @@
 														<?php endif; ?>
 
 														<label class="activo">Activo</label>
-														<input class="check" type="checkbox" name="act" value=1>
+														<input class="check" type="checkbox" name="act" checked value="1">
 
-											
+
 
 
 														<br><br>
