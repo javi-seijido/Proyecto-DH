@@ -32,26 +32,36 @@
 	function crearUsuario_create($usuario){
 		$usuarioFinal = [
 			'codigo' => $usuario['codigo'],
-			'password' => password_hash($usuario['pass'], PASSWORD_DEFAULT),
 			'email' => $usuario['email'],
+			'password' => password_hash($usuario['pass'], PASSWORD_DEFAULT),
+			'act' => $usuario['act'],
 			'nivel' => $usuario['nivel'],
 		];
+
+	// 	echo "<pre>";
+ // 	 var_dump($usuarioFinal);
+ // 	 echo "</pre>";
+ // 	 exit;
+
 
 		return $usuarioFinal;
 	}
 
+
 	function guardarUsuario_create($usuario, $db){
+
 		//  echo "<pre>";
-		//  var_dump($db);
+		//  var_dump($usuario);
 		//  echo "</pre>";
 		//  exit;
-		$stmt = $db->prepare("INSERT INTO user (username,email,password,act,id_perfil) VALUES(:username,:email,:password,:act,:perfil)");
+
+		$stmt = $db->prepare("INSERT INTO user (username,email,password,act,perfil_id) VALUES(:username,:email,:password,:act,:perfil_id)");
 
 		$stmt->bindValue(':username',$usuario['codigo'], PDO::PARAM_STR);
 		$stmt->bindValue(':email',$usuario['email'], PDO::PARAM_STR);
 		$stmt->bindValue(':password',$usuario['password'], PDO::PARAM_STR);
-		$stmt->bindValue(':act',1, PDO::PARAM_INT);
-		$stmt->bindValue(':perfil',$usuario['nivel'], PDO::PARAM_STR);
+		$stmt->bindValue(':act',$usuario['act'], PDO::PARAM_INT);
+		$stmt->bindValue(':perfil_id',$usuario['nivel'], PDO::PARAM_INT);
 
 		$stmt->execute();
 }
@@ -60,8 +70,8 @@
 	// 	file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
 	// }
 	//
-	function enviarAAltaOk(){
-		header('location: altaOk.php'); exit;
-	}
+	// function enviarAAltaOk(){
+	// 	header('location: altaOk.php'); exit;
+	// }
 
 ?>

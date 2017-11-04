@@ -1,11 +1,12 @@
 <?php
 	require_once('control_session.php');
 	require_once('func.php');
+	require('conexion.php');
 
 	$nivel = [
-		'A'=> 'Administrador',
-		'B'=> 'Perfil 1',
-		'C'=> 'Perfil 2'
+		'1'=> 'Administrador',
+		'2'=> 'Perfil 1',
+		'3'=> 'Perfil 2'
 	];
 
 	$codigo = '';
@@ -26,11 +27,16 @@
 
 		if (empty($erroresFinales)) {
 			// Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-			$usuarioAGuardar = crearUsuario($_POST);
+			$usuarioAGuardar = crearUsuario_create($_POST);
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-			guardarUsuario($usuarioAGuardar);
+			guardarUsuario_create($usuarioAGuardar, $db);
 		}
+
+		//  echo "<pre>";
+		//  var_dump($usuarioAGuardar);
+		//  echo "</pre>";
+		//  exit;
 	}
 
 ?>
@@ -138,12 +144,18 @@
 															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
 															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
 														<?php endif; ?>
+
 														<label class="activo">Activo</label>
-														<input class="check" type="checkbox" name="habilitado" checked value="checked"><br><br>
+														<input class="check" type="checkbox" name="act" value=1>
+
+											
+
+
+														<br><br>
 
                             <div class="botonera">
 
-                              <button class="input" type="submit">Crear</button>
+                              <button class="input" type="submit" name="enviar">Crear</button>
                               <button class="input" type="submit">Buscar</button>
                               <button class="input" type="submit">Modificar</button>
 
