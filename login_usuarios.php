@@ -33,6 +33,10 @@
 			guardarUsuario_create($usuarioAGuardar, $db);
 		}
 
+		header('location: index.php'); exit;
+
+
+
 		//  echo "<pre>";
 		//  var_dump($usuarioAGuardar);
 		//  echo "</pre>";
