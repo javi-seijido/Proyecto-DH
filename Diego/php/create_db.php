@@ -1,15 +1,12 @@
 <?php
 
-require_once ('funciones_log.php');
-
-
 if ($_POST) {
    if (isset($_POST["cr_db"])) {
     //  echo "<pre>";
     //  var_dump($_POST);
     //  echo "</pre>";
     //  exit;
-      $dsn = 'mysql:host=10.20.42.102;';
+      $dsn = 'mysql:host=192.168.0.12;';
       $db_user = 'root';
       $db_pass = '1111';
       $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
@@ -35,7 +32,7 @@ if ($_POST) {
 
    } else {
         if (isset($_POST["cr_tb"])) {
-          $dsn = 'mysql:host=10.20.42.102;dbname=gib;';
+          $dsn = 'mysql:host=192.168.0.12;dbname=gib;';
           $db_user = 'root';
           $db_pass = '1111';
           $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
@@ -199,9 +196,11 @@ if ($_POST) {
 
 
      } else {
-       $usuarios = traerTodos();
+      require_once("../clases/dbJSON.php");
+      $dbJSON = new dbJSON();
+      $usuarios = $dbJSON->traerTodos();
 
-       $dsn = 'mysql:host=10.20.42.102;dbname=gib;';
+       $dsn = 'mysql:host=192.168.0.12;dbname=gib;';
        $db_user = 'root';
        $db_pass = '1111';
        $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
