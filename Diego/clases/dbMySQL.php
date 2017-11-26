@@ -7,7 +7,7 @@ class dbMySQL extends db {
   private $conn;
 
   public function __construct() {
-    $dsn = 'mysql:host=192.168.10.18;dbname=gib;
+    $dsn = 'mysql:host=192.168.0.12;dbname=gib;
     charset=utf8mb4;port:3306';
     $db_user = 'root';
     $db_pass = '1111';
