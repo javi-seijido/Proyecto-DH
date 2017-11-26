@@ -1,6 +1,11 @@
 <?php
 require('conexion.php');
 require_once('funciones_reg.php');
+include_once("soporte.php");
+
+if ($auth->estaLogueado()) {
+  header('Location: main_menu.php'); exit;
+}
 
 $query = $db->prepare("SELECT * FROM location");
 
@@ -86,8 +91,8 @@ if ($_POST) {
 
   // $username = $_POST['username'];
 
-  // Validación - La función validarUsuario retorna un array
-  $erroresFinales = validarPersonal($_POST,$db);
+  // Validación
+  $errores_finales = $validator->validarPersonal($_POST);
 
 
   if (empty($erroresFinales)) {
@@ -98,11 +103,14 @@ if ($_POST) {
     // Vuelvo a preguntar si el array de errores está vació
     if (empty($erroresFinales)) {
       // Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-      $usuarioAGuardar = crearUsuario($_POST);
+      $usuarioAGuardar = $dbMySQL->crearUsuario($_POST);
       // var_dump($usuarioAGuardar);
       // exit;
       // Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-      guardarUsuario($usuarioAGuardar, $db);
+      $dbMySQL->guardarUsuario($usuarioAGuardar, $db);
+
+  			$personal->guardarImagen();
+  			
 
 
 
