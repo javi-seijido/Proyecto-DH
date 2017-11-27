@@ -1,34 +1,43 @@
 <?php
-require('conexion.php');
-require_once('funciones_reg.php');
+// require('conexion.php');
+// require_once('funciones_reg.php');
 include_once("soporte.php");
 
-if ($auth->estaLogueado()) {
-  header('Location: main_menu.php'); exit;
-}
+// if ($auth->estaLogueado()) {
+//   header('Location: main_menu.php'); exit;
+// }
 
-$query = $db->prepare("SELECT * FROM location");
+$table = 'location';
+$resul = $db->cargarcombo($table);
+// $query = $db->prepare("SELECT * FROM location");
 
-$query->execute();
-$resul = $query->fetchall(PDO::PARAM_STR);
+// $query->execute();
+// $resul = $query->fetchall(PDO::PARAM_STR);
+// $resul = $query;
 
 foreach ($resul as $a => $b) {
   $localidades[$a+1]=$b['name'];
 }
 
-$query = $db->prepare("SELECT * FROM street");
+$table = 'street';
+$resul = $db->cargarcombo($table);
+// $query = $db->prepare("SELECT * FROM street");
 
-$query->execute();
-$resul = $query->fetchall(PDO::PARAM_STR);
+// $query->execute();
+// $resul = $query->fetchall(PDO::PARAM_STR);
+// $resul = $query;
 
 foreach ($resul as $a => $b) {
   $dir_calle[$a+1]=$b['name'];
 }
 
-$query = $db->prepare("SELECT * FROM ranks");
+$table = 'ranks';
+$resul = $db->cargarcombo($table);
+// $query = $db->prepare("SELECT * FROM ranks");
 
-$query->execute();
-$resul = $query->fetchall(PDO::PARAM_STR);
+// $query->execute();
+// $resul = $query->fetchall(PDO::PARAM_STR);
+// $resul = $query;
 
 foreach ($resul as $a => $b) {
   $escalafones[$a+1]=$b['name'];
@@ -92,25 +101,36 @@ if ($_POST) {
   // $username = $_POST['username'];
 
   // Validación
-  $errores_finales = $validator->validarPersonal($_POST);
+    $erroresFinales = $validator->validarPersonal($_POST);
 
+    $contmails = $db->comprobarEmail($_POST['email']);
 
-  if (empty($erroresFinales)) {
+    if ($contmails == 1) {
+      $erroresFinales['email'] = 'El Email ya Existe';
+    }
 
+    $erroresFinales=$personal->guardarImagen('avatar', $erroresFinales);
     // Si no hay errores en POST 1ero ejecuto la función de guardar la imagen
-    $erroresFinales = guardarImagen('avatar', $erroresFinales);
+    // $erroresFinales = guardarImagen('avatar', $erroresFinales);
 
     // Vuelvo a preguntar si el array de errores está vació
     if (empty($erroresFinales)) {
+      // echo "<pre>";
+      // var_dump($errores_finales);
+      // echo "</pre>";
       // Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-      $usuarioAGuardar = $dbMySQL->crearUsuario($_POST);
+      $_POST['fnacimiento'] = $validator->convertirFecha_us($_POST['fnacimiento']);
+      $_POST['falta'] = $validator->convertirFecha_us($_POST['falta']);
+      $_POST['fbaja'] = $validator->convertirFecha_us($_POST['fbaja']);
+
+      $usuarioAGuardar = $db->crearUsuario($_POST);
       // var_dump($usuarioAGuardar);
       // exit;
       // Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-      $dbMySQL->guardarUsuario($usuarioAGuardar, $db);
+      $db->guardarUsuario($usuarioAGuardar);
 
-  			$personal->guardarImagen();
-  			
+
+
 
 
 
@@ -120,8 +140,6 @@ if ($_POST) {
       // Ok guardado, redireccionado
       header('location: registro_personal.php'); exit;
     }
-  }
-
 }
 
 ?>

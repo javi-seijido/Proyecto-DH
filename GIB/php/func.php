@@ -30,48 +30,49 @@
 	}
 
 	function crearUsuario_create($usuario){
+
 		$usuarioFinal = [
 			'codigo' => $usuario['codigo'],
-			'email' => $usuario['email'],
 			'password' => password_hash($usuario['pass'], PASSWORD_DEFAULT),
-			'act' => $usuario['act'],
+			'email' => $usuario['email'],
 			'nivel' => $usuario['nivel'],
 		];
 
-	// 	echo "<pre>";
- // 	 var_dump($usuarioFinal);
- // 	 echo "</pre>";
- // 	 exit;
-
+		if (isset($usuario['habilitado'])) {
+				$usuarioFinal['act'] = 1;
+		} else {
+				$usuarioFinal['act'] = 0;
+		}
 
 		return $usuarioFinal;
 	}
 
-
 	function guardarUsuario_create($usuario, $db){
+		try {
+			$stmt=$db->prepare("
+			 INSERT INTO user (username,email,password,act,perfil_id)
+			 VALUES (:username,:email,:password,:act,:perfil_id);
+			");
 
-		//  echo "<pre>";
-		//  var_dump($usuario);
-		//  echo "</pre>";
-		//  exit;
+			$stmt->bindValue(":username",$usuario['codigo'],PDO::PARAM_STR);
+			$stmt->bindValue(":email",$usuario['email'],PDO::PARAM_STR);
+			$stmt->bindValue(":password",$usuario['password'],PDO::PARAM_STR);
+			$stmt->bindValue(":act",$usuario['act'],PDO::PARAM_INT);
+			$stmt->bindValue(":perfil_id",$usuario['nivel'],PDO::PARAM_INT);
+			$stmt->execute();
 
-		$stmt = $db->prepare("INSERT INTO user (username,email,password,act,perfil_id) VALUES(:username,:email,:password,:act,:perfil_id)");
+	  }catch( PDOException $e ){
+					 echo 'El error fue->'.$e->getMessage();
+		}
+	}
 
-		$stmt->bindValue(':username',$usuario['codigo'], PDO::PARAM_STR);
-		$stmt->bindValue(':email',$usuario['email'], PDO::PARAM_STR);
-		$stmt->bindValue(':password',$usuario['password'], PDO::PARAM_STR);
-		$stmt->bindValue(':act',$usuario['act'], PDO::PARAM_INT);
-		$stmt->bindValue(':perfil_id',$usuario['nivel'], PDO::PARAM_INT);
-
-		$stmt->execute();
-}
 	// 	$usuarioFinal = json_encode($usuario);
 	//
 	// 	file_put_contents('usuarios.json', $usuarioFinal . PHP_EOL, FILE_APPEND); //PHP_EOL = Salto de linea
 	// }
 	//
-	// function enviarAAltaOk(){
-	// 	header('location: altaOk.php'); exit;
-	// }
+	function enviarAAltaOk(){
+		header('location: altaOk.php'); exit;
+	}
 
 ?>

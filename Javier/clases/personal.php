@@ -1,5 +1,5 @@
 <?php
-
+require_once("db.php");
 class Personal {
   private $id;
   private $name;
@@ -20,29 +20,29 @@ class Personal {
 
 
 
-
-  public function __construct($id, $name, $lastname, $age, $gender, $date_age, $dni, $movil_phone, $email, $street_id, $number_street, $location_id, $rank_id, $date_start, $date_end, $info = null) {
-
-
-    $this->$id = $id;
-    $this->$name = $name;
-    $this->$lastname = $lastname;
-    $this->$age = $age;
-    $this->$gender = $gender;
-    $this->$date_age = $date_age;
-    $this->$dni = $dni;
-    $this->$movil_phone = $movil_phone;
-    $this->$email = $email;
-    $this->$street_id = $street_id;
-    $this->$number_street = $number_street;
-    $this->$location_id = $location_id ;
-    $this->$rank_id = $rank_id;
-    $this->$date_start = $date_start;
-    $this->$date_end = $date_end;
-    $this->$info = $info;
-
-
-  }
+  //
+  // public function __construct($id, $name, $lastname, $age, $gender, $date_age, $dni, $movil_phone, $email, $street_id, $number_street, $location_id, $rank_id, $date_start, $date_end, $info = null) {
+  //
+  //
+  //   $this->$id = $id;
+  //   $this->$name = $name;
+  //   $this->$lastname = $lastname;
+  //   $this->$age = $age;
+  //   $this->$gender = $gender;
+  //   $this->$date_age = $date_age;
+  //   $this->$dni = $dni;
+  //   $this->$movil_phone = $movil_phone;
+  //   $this->$email = $email;
+  //   $this->$street_id = $street_id;
+  //   $this->$number_street = $number_street;
+  //   $this->$location_id = $location_id ;
+  //   $this->$rank_id = $rank_id;
+  //   $this->$date_start = $date_start;
+  //   $this->$date_end = $date_end;
+  //   $this->$info = $info;
+  //
+  //
+  // }
 
   public function getId() {
     return $this->id;
@@ -153,7 +153,7 @@ class Personal {
   public function setDate_end($date_end) {
     $this->date_end = $date_end;
   }
-  public function setDate_end() {
+  public function getDate_end() {
     return $this->date_end;
   }
 
@@ -165,22 +165,35 @@ class Personal {
   }
 
 
-  function guardarImagen() {
+  function guardarImagen($laImagen, $errores){
+		if ($_FILES[$laImagen]['error'] == UPLOAD_ERR_OK) {
+			// Capturo el nombre de la imagen, para obtener la extensión
+			$nombreImagen = $_FILES[$laImagen]['name'];
+			// Obtengo la extensión de la imagen
+			$ext = pathinfo($nombreImagen, PATHINFO_EXTENSION);
+			// Capturo el archivo temporal
+			$archivoImagen = $_FILES[$laImagen]['tmp_name'];
 
-		if ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK)
-		{
+			// Pregunto si la extensión es la deseada
+			if ($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png' || $ext == 'gif') {
+				// Armo la ruta donde queda gurdada la imagen
 
-			$nombre=$_FILES["avatar"]["name"];
-			$archivo=$_FILES["avatar"]["tmp_name"];
+				$rutaArchivo = dirname(__FILE__) . '/../avatares/' . $_POST['email'] . '.' . $ext;
 
-			$ext = pathinfo($nombre, PATHINFO_EXTENSION);
 
-			$miArchivo = dirname(__FILE__);
-			$miArchivo = $miArchivo . "/../img/";
-			$miArchivo = $miArchivo . $this->email . "." . $ext;
 
-			move_uploaded_file($archivo, $miArchivo);
+
+				// Subo la imagen definitivamente
+				move_uploaded_file($archivoImagen, $rutaArchivo);
+			} else {
+				$errores['imagen'] = 'El formato tiene que ser JPG, JPEG, PNG o GIF';
+			}
+		} else {
+			// Genero error si no se puede subir
+			$errores['imagen'] = 'No se pudo subir la imagen';
 		}
+
+		return $errores;
 	}
 }
 

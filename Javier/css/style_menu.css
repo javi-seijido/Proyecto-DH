@@ -12,6 +12,7 @@ body {
     background-position: center center;
     font-size: 10px;
     height: 100vh;
+
 }
 a {
     color: #222;
@@ -27,7 +28,7 @@ header {
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
     box-sizing: border-box;
     max-width: auto;
-    z-index: 2;
+    z-index: 1;
 
 
 }
@@ -35,6 +36,14 @@ header {
     position: absolute;
     padding: 0 0 0.2em;
 }*/
+
+.text_user {
+  font-size: 10px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+}
+
+
 
 .control-menu {
     background-color: transparent;
@@ -116,7 +125,7 @@ ul.nav-items li a span {
   position: absolute;
   width: 5%;
   right: 10px;
-  top: 15px;
+  top: 12px;
 }
 
 .li_flecha{
@@ -127,7 +136,7 @@ ul.nav-items li a span {
   position: absolute;
   height: 30px;
   margin-left: 0.5em;
-  top: 3px;
+  top: 5px;
 }
 
 .menu{
@@ -161,6 +170,12 @@ ul.nav-items li a span {
 }
 #Consultas a span {
     border-color: #0dff00;
+}
+
+#sub_consultas {
+  position: absolute;
+  left: 10%;
+  /*display: none*/
 }
 
 .menu_logeado{
@@ -269,4 +284,23 @@ ul.nav-items2 li a span {
   height: 40px;
   margin-left: 0.5em;
   top: 3px;
+}
+
+@media (min-width: 1200px){
+
+  .img_consultas{
+    width: 8%;
+    top: 10px;
+  }
+
+  #navigation:target ul.nav-items {
+    width: 15%;
+  }
+
+  .img_ctrol{
+    height: 35px;
+    margin-left: 1.5em;
+    top: 3px;
+  }
+
 }

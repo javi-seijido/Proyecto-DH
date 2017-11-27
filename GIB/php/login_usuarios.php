@@ -1,7 +1,7 @@
 <?php
 	require_once('control_session.php');
 	require_once('func.php');
-	require('conexion.php');
+	require_once('conexion.php');
 
 	$nivel = [
 		'1'=> 'Administrador',
@@ -30,13 +30,8 @@
 			$usuarioAGuardar = crearUsuario_create($_POST);
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-			guardarUsuario_create($usuarioAGuardar, $db);
+			guardarUsuario_create($usuarioAGuardar,$db);
 		}
-
-		//  echo "<pre>";
-		//  var_dump($usuarioAGuardar);
-		//  echo "</pre>";
-		//  exit;
 	}
 
 ?>
@@ -144,18 +139,12 @@
 															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
 															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
 														<?php endif; ?>
-
 														<label class="activo">Activo</label>
-														<input class="check" type="checkbox" name="act" checked value="1">
-
-
-
-
-														<br><br>
+														<input class="check" type="checkbox" name="habilitado" checked><br><br>
 
                             <div class="botonera">
 
-                              <button class="input" type="submit" name="enviar">Crear</button>
+                              <button class="input" type="submit">Crear</button>
                               <button class="input" type="submit">Buscar</button>
                               <button class="input" type="submit">Modificar</button>
 

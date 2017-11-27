@@ -1,4 +1,5 @@
 <?php
+require_once("db.php");
 
 class Usuario {
   private $id;
@@ -9,6 +10,9 @@ class Usuario {
   private $perfil_id;
 
   public function __construct($email, $password, $act, $username, $perfil_id, $id = null) {
+    echo "<pre>";
+    var_dump($email);
+    echo "</pre>";
     if ($id == null) {
       // Viene por POST
       $this->password = password_hash($password, PASSWORD_DEFAULT);
@@ -73,26 +77,6 @@ class Usuario {
     $this->perfil_id = $perfil_id;
   }
 
-
-
-
-  function guardarImagen() {
-
-		if ($_FILES["avatar"]["error"] == UPLOAD_ERR_OK)
-		{
-
-			$nombre=$_FILES["avatar"]["name"];
-			$archivo=$_FILES["avatar"]["tmp_name"];
-
-			$ext = pathinfo($nombre, PATHINFO_EXTENSION);
-
-			$miArchivo = dirname(__FILE__);
-			$miArchivo = $miArchivo . "/../img/";
-			$miArchivo = $miArchivo . $this->email . "." . $ext;
-
-			move_uploaded_file($archivo, $miArchivo);
-		}
-	}
 }
 
 ?>

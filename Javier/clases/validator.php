@@ -5,8 +5,7 @@ require_once("db.php");
 class Validator {
 
 
-// --------------------------------FUNCIONES UTILIZADAS POR EL LOGUIN------------------------------------------------------
-
+// -------------------------------FUNCIONES UTILIZADAS POR EL LOGUIN------------------------------------------------------
   public 	function validarUsuario($data){
     $errores = [];
 
@@ -19,11 +18,13 @@ class Validator {
     return $errores;
   }
 
-//--------------------------------FIN FUNCIONES UTILIZADAS POR EL LOGUIN------------------------------------------------------
+// -------------------------------FIN FUNCIONES UTILIZADAS POR EL LOGUIN------------------------------------------------------
+
+
 
 // --------------------------------FUNCIONES UTILIZADAS POR EL ABM DE PERSONAL---------------------------------------------------------
 
-function validarFecha($fecha)
+public function validarFecha($fecha)
 {
   $valores = [];
 
@@ -36,7 +37,7 @@ function validarFecha($fecha)
 }
 
 
-function convertirFecha_us($fecha_sp)
+public function convertirFecha_us($fecha_sp)
 
 {
   $date = new DateTime($fecha_sp);
@@ -46,7 +47,7 @@ function convertirFecha_us($fecha_sp)
 
 
 
-function validarPersonal($data){
+public function validarPersonal($data){
 $errores = [];
 
 
@@ -69,7 +70,7 @@ if (trim($data['edad']) == '') {
 if (trim($data['fnacimiento']) == '') {
     $errores['fnacimiento'] = 'Ingrese una Fecha.!';
   } else {
-          if (!validarFecha($data['fnacimiento'])) {
+          if (!$this->validarFecha($data['fnacimiento'])) {
             $errores['fnacimiento'] = 'Formato Erroneo.!';
           }
 
@@ -99,10 +100,10 @@ if (trim($data['telefonomovil']) == '') {
 if (trim($data['email']) == '') {
 $errores['email'] = 'Ingrese Email.!';
 } elseif (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
-$errores['email'] = 'Formato Erroneo..!';
-} elseif (comprobarEmail($data['email'], $db) == 1) {
-$errores['email'] = 'El Email ya Existe';
-}
+$errores['email'] = 'Formato Erroneo..!';}
+// } elseif ($this->comprobarEmail($data['email']) == 1) {
+// $errores['email'] = 'El Email ya Existe';
+// }
 
 
 if (trim($data['calle']) == '') {
@@ -132,14 +133,14 @@ if (trim($data['escalafon']) == '') {
   if (trim($data['falta']) == '') {
       $errores['falta'] = 'Ingrase una Fecha.!';
     } else {
-            if (!validarFecha($data['falta'])) {
+            if (!$this->validarFecha($data['falta'])) {
               $errores['falta'] = 'Formato Erroneo.!';
             }
 
 
             }
 
-            if (!validarFecha($data['fbaja'])) {
+            if (!$this->validarFecha($data['fbaja'])) {
               $errores['fbaja'] = 'Formato Erroneo.!';
             }
 
@@ -150,30 +151,7 @@ if (trim($data['escalafon']) == '') {
 return $errores;
 }
 
-function comprobarEmail ($email, $db){
-
-
-$query = $db->prepare("SELECT count(*) as cantidad
-  FROM personal
-
-  WHERE email LIKE :busqueda
-
-  ");
-
-
-$query->bindValue(':busqueda', '%'.$email.'%', PDO::PARAM_STR);
-$query->execute();
-$resul_cant = $query->fetch(PDO::FETCH_ASSOC);
-
-$numero=intval ($resul_cant['cantidad']);
-// echo "<pre>";
-// var_dump($numero);
-// echo "<pre>";
-// exit;
-return $numero;
-}
-
-function guardarImagen($laImagen, $errores){
+public function guardarImagen($laImagen, $errores){
   if ($_FILES[$laImagen]['error'] == UPLOAD_ERR_OK) {
     // Capturo el nombre de la imagen, para obtener la extensión
     $nombreImagen = $_FILES[$laImagen]['name'];
@@ -205,12 +183,62 @@ function guardarImagen($laImagen, $errores){
 }
 
 
-// --------------------------------FUNCIONES UTILIZADAS POR EL ABM DE PERSONAL---------------------------------------------------------
+// --------------------------------FIN FUNCIONES UTILIZADAS POR EL ABM DE PERSONAL---------------------------------------------------------
+   function validarInformacion($informacion, db $db) {
+     $errores = [];
+
+     $nombre=$_FILES["avatar"]["name"];
+
+     $ext = pathinfo($nombre, PATHINFO_EXTENSION);
+
+     if ($_FILES["avatar"]["error"] != 0) {
+       $errores["avatar"] = "Error al cargar la foto";
+     } else if ($ext != "jpg" && $ext != "jpeg" && $ext != "png") {
+       $errores["avatar"] = "La extension de la foto no es válida";
+     }
+
+     foreach ($informacion as $clave => $valor) {
+       $informacion[$clave] = trim($valor);
+     }
 
 
+     if (strlen($informacion["username"]) <= 3) {
+       $errores["username"] = "Tenes que poner más de 3 caracteres en tu nombre de usuario";
+     }
+
+     if ($informacion["edad"] < 18) {
+       $errores["edad"] = "Tenes que tener más de 18 años";
+     }
+
+     if (is_numeric($informacion["telefono"]) == false) {
+       $errores["telefono"] = "El telefono debe ser un numero";
+     }
 
 
+     if ($informacion["email"] == "") {
+       $errores["email"] = "Che, dejaste el mail incompleto";
+     }
+     else if (filter_var($informacion["email"], FILTER_VALIDATE_EMAIL) == false) {
+       $errores["mail"] = "El mail tiene que ser un mail";
+     } else if ($db->traerPorMail($informacion["email"]) != NULL) {
+       $errores["mail"] = "El usuario ya existia!";
+     }
 
+     if ($informacion["password"] == "") {
+       $errores["password"] = "No llenaste la contraseña";
+     }
+
+     if ($informacion["cpassword"] == "") {
+       $errores["cpassword"] = "No llenaste completar contraseña";
+     }
+
+     if ($informacion["password"] != "" && $informacion["cpassword"] != "" && $informacion["password"] != $informacion["cpassword"]) {
+       $errores["password"] = "Las contraseñas no coinciden";
+     }
+
+
+     return $errores;
+   }
 
 }
 

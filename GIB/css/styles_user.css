@@ -1,4 +1,4 @@
-*{
+rgb(255, 255, 255)*{
   box-sizing: border-box;
 }
 
@@ -14,8 +14,17 @@ body{
 
 }
 
+.nav_list_browser{
+  background-color: rgba(255, 255, 255, 0.5);
+  width: 100px;
+}
+
+.titulo_browser{
+  display: inline;
+}
+
 .container{
-  margin-top: 18px;
+  margin-top: 4px;
 position: relative;
 width: 100%;
 text-align: center;
@@ -87,8 +96,10 @@ margin-bottom: 0%;
   background-color: red;
   color: white;
   margin-left: 35%;
+
   }
 
+}
 
 .label_usr {
  display: inline-block;
@@ -115,6 +126,7 @@ margin-bottom: 0%;
   width: 85%;
 }
 
+
 .foto_perfil {
   width:36%;
   margin: 2%;
@@ -136,6 +148,8 @@ margin-bottom: 0%;
 .volver_logo{
 width: 5em;
 height: 5em;
+margin: 2%;
+
 }
 
 .input{
@@ -146,13 +160,13 @@ height: 5em;
   color:white;
   background: #8162FE;
   border:0px;
-  width:27%;
+  width:21%;
   height:25px;
   border-radius: 20px 20px 20px 20px;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   position: relative;
   /*display: block;*/
-margin-left: 2%;
+   margin: auto;
 }
 
 .botonera{
@@ -161,15 +175,9 @@ font-size: 11px;
 
 .botonimg{
 margin-left: 8px;
+
 }
 
-.boton_nivel{
-  font-size: 11px;
-}
-
-.activo{
-  font-size: 11px;
-}
 
 
 @media (min-width: 650px){
@@ -213,7 +221,7 @@ margin-left: 8px;
     font-size: 14px;
     box-shadow: 4px 4px 7px rgb(0, 0, 0);
     color: rgb(152, 152, 152);
-    width: 55%;
+    width: 65%;
     height: 25px;
   }
 
@@ -254,25 +262,17 @@ margin-left: 42%;
 
 }
 
-.boton_nivel{
-  font-size: 14px;
-}
-
 .error_icon{
   width: 6%;
   margin: 0 0 -2% 2%;
 }
 
-.activo{
-  font-size: 16px;
-}
-
 @media (min-width: 1200px){
 
 .foto_perfil {
-float: left;
+float: right;
 display: inline;
-width:15%;
+width:18%;
 margin:2%;
 margin-top: 3%;
 overflow: hidden;
@@ -289,7 +289,7 @@ overflow: hidden;
 
 
 .us_campo{
-width:50%;
+width:40%;
 }
 
 .personal_operativo{
@@ -300,13 +300,13 @@ margin-left:4%;
 
 }
 .personal_border{
-width: 50%;
+width: 70%;
 height: 57%;
 margin: auto;
 }
 
 .datos_personales{
-display: block;
+display: inline;
 margin:-2%;
 }
 
@@ -318,7 +318,7 @@ margin: 2%;
 
 .boton{
   border-radius: 20px 20px 20px 20px;
-  width: 12%;
+  width: 20%;
   height: 25px;
   font-size: 15px;
 }
@@ -333,11 +333,11 @@ text-align: center;
 
 h1{
   border: solid 1px rgb(0, 0, 0);
-  margin: 4% 7% 1% 25%;
+  margin: 4% 7% 1% 15%;
   box-shadow: 4px 4px 7px rgb(0, 0, 0);
   padding: 1%;
   border-radius: 10px;
-  width: 50%;
+  width: 70%;
 }
 
 .botonimg{
@@ -345,61 +345,8 @@ position: fixed;
 margin-left: 27%;
 float: right;
 }
-
 .boton_nivel{
   font-size: 16px;
-  margin-left: 6%;
 }
-
-.input-file{
-
-  font-size:1.2em;
-  font-weight:bold;
-  color:white;
-  background: #8162FE;
-  border:0px;
-  width:20%;
-  height:25px;
-  border-radius: 20px 20px 20px 20px;
-  box-shadow: 4px 4px 7px rgb(0, 0, 0);
-  margin: 9% 0% 17%;
-}
-
-.error_icon{
-  width: 3%;
-  margin: 0 0 -2% 2%;
-}
-
-.input{
-  position: inherit;
-  font-size:1.2em;
-  /*font-family:Verdana,Helvetica;*/
-  font-weight:bold;
-  color:white;
-  background: #8162FE;
-  border:0px;
-  width:20%;
-  height:25px;
-  border-radius: 20px 20px 20px 20px;
-  box-shadow: 4px 4px 7px rgb(0, 0, 0);
-  position: relative;
-  /*display: block;*/
-margin-left: 2%;
-}
-
-.botonera{
-font-size: 11px;
-padding-left: 22%;
-}
-
-.label_nivel {
- display: inline-block;
- width: 60px;
- text-align: right;
- font-family: sans-serif;
- font-size: 1.7em;
-padding-left: 12%;
-}
-
 
 }

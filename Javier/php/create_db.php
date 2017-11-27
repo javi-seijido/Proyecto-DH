@@ -1,17 +1,14 @@
 <?php
 
-require_once ('funciones_log.php');
-
-
 if ($_POST) {
    if (isset($_POST["cr_db"])) {
     //  echo "<pre>";
     //  var_dump($_POST);
     //  echo "</pre>";
     //  exit;
-      $dsn = 'mysql:host=localhost;';
+      $dsn = 'mysql:host=192.168.10.48;';
       $db_user = 'root';
-      $db_pass = '';
+      $db_pass = '1111';
       $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
      try {
          	$db = new PDO($dsn, $db_user, $db_pass, $opciones);
@@ -35,9 +32,9 @@ if ($_POST) {
 
    } else {
         if (isset($_POST["cr_tb"])) {
-          $dsn = 'mysql:host=localhost;dbname=gib;';
+          $dsn = 'mysql:host=192.168.10.48;dbname=gib;';
           $db_user = 'root';
-          $db_pass = '';
+          $db_pass = '1111';
           $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
 
           try {
@@ -199,11 +196,13 @@ if ($_POST) {
 
 
      } else {
-       $usuarios = traerTodos();
+      require_once("../clases/dbJSON.php");
+      $dbJSON = new dbJSON();
+      $usuarios = $dbJSON->traerTodos();
 
-       $dsn = 'mysql:host=localhost;dbname=gib;';
+       $dsn = 'mysql:host=192.168.10.48;dbname=gib;';
        $db_user = 'root';
-       $db_pass = '';
+       $db_pass = '1111';
        $opciones = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION );
 
        try {
