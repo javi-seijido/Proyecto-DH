@@ -29,7 +29,7 @@
           <li class="li_flecha" id="Personal"><a href="registro_personal.php"><span>ABM Personal</span>
                              <img class="img_consultas" src="../images/select.png" alt=""></a></li>
 
-          <li class="li_flecha" id="Alarmas"><a href="#Alarmas"><span>ABM Alarmas</span>
+          <li class="li_flecha" id="Alarmas"><a href="ejemplo_browser.php"><span>ABM Alarmas</span>
                             <img class="img_consultas" src="../images/select.png" alt=""></a></li>
 
           <li class="li_flecha" id="Suministros"><a href="#Suministros"><span>ABM Suministros</span>

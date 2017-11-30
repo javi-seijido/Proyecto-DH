@@ -1,11 +1,12 @@
 <?php
 	require_once('control_session.php');
 	require_once('func.php');
+	require_once('conexion.php');
 
 	$nivel = [
-		'A'=> 'Administrador',
-		'B'=> 'Perfil 1',
-		'C'=> 'Perfil 2'
+		'1'=> 'Administrador',
+		'2'=> 'Perfil 1',
+		'3'=> 'Perfil 2'
 	];
 
 	$codigo = '';
@@ -26,10 +27,10 @@
 
 		if (empty($erroresFinales)) {
 			// Creo Usuario en ARRAY, $usuarioAGuardar recibe el return de la función crear usuario, que es un array asociativo que armé como yo quería.
-			$usuarioAGuardar = crearUsuario($_POST);
+			$usuarioAGuardar = crearUsuario_create($_POST);
 
 			// Guardo Usuario en JSON, recibe el array guardado en la variable de arriba
-			guardarUsuario($usuarioAGuardar);
+			guardarUsuario_create($usuarioAGuardar,$db);
 		}
 	}
 
@@ -56,7 +57,7 @@
 				</div>
 
 
-        <br><br>
+
 
         <div class="container">
 
@@ -121,7 +122,7 @@
 															<span class="span_error"><?=$erroresFinales['email'];?></span>
 														<?php endif; ?><br><br>
 
-                            <br><br><br>
+                            <br><br>
 
                             <label class="label_nivel">Nivel:</label>
 														<select class="boton_nivel" name="nivel">
@@ -138,8 +139,8 @@
 															<span style="color: red;"><img class="error_icon" src="../images/icon_error.png"></span>
 															<span class="span_error"><?=$erroresFinales['nivel'];?></span>
 														<?php endif; ?>
-														<label>Activo</label>
-														<input class="check" type="checkbox" name="habilitado" checked value="checked"><br><br>
+														<label class="activo">Activo</label>
+														<input class="check" type="checkbox" name="habilitado" checked><br><br>
 
                             <div class="botonera">
 

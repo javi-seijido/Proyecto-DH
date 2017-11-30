@@ -1,16 +1,17 @@
 <?php
-session_start();
+include_once("soporte.php");
 
-require_once('funciones_log.php');
+if($auth->estaLogueado()){
+  $usrname = $_SESSION['name'];
 
-if(!estaLogueado()){
-   header('Location: index.php'); exit;
+  $images = glob('../avatares/' . $_SESSION['email'] . '*');
+}else {
+     header('Location: index.php'); exit;
 }
+
 // echo "<pre>";
 // var_dump($_SESSION);
 // echo "</pre>";
-$usrname = $_SESSION['name'];
 
-$images = glob('../avatares/' . $_SESSION['email'] . '*');
 
 ?>

@@ -1,93 +1,40 @@
 <?php
-  session_start();
 
-  require_once('funciones_log.php');
+  include_once("soporte.php");
 
-
- if (isset($_COOKIE['id'])){
-   $usuario['name'] = $_COOKIE['name'];
-   $usuario['id'] = $_COOKIE['id'];
-   loguear($usuario);
-
-   header('Location: main_menu.php'); exit;
- } else {
-
-       if(estaLogueado()){
-        //  echo "<pre>";
-        //  var_dump($_COOKIE);
-        //  echo "</pre>";
-        //  exit;
-         header('Location: main_menu.php'); exit;
-       }
- }
-
-
-
-
+ if ($auth->estaLogueado()) {
+		header('Location: main_menu.php'); exit;
+	}
 
 	$var_usr = '';
 	$var_pass = '';
   $errores_finales = [];
-  // $var_email = '';
-  //
-  // if ($_GET) {
-  //
-  //   $errores_finales = validaremail($_GET);
-  //
-  //   if (empty($errores_finales)) {
-  //
-  //      $email = $_GET['email'];
-  //      $email_ok = comprobarEmail($email);
-  //      echo "<pre>";
-  //      var_dump($email_ok);
-  //      echo "</pre>";
-  //
-  //
-  //      if (empty($email_ok)) {
-  //        $errores_finales['er_email'] =  'Email Erroneo';
-  //      } else {
-  //          $pass_reset = rand(1000,9000);
-  //
-  //          update_pass($pass_reset,$email_ok['id']);
-  //
-  //          mail($email_ok['email'],"Olvido su contraceña","Su Password es: " .$email_ok['password'] );
-  //
-  //          }
-  //
-  //
-  //   }
-  // }
-
 
 	if ($_POST) {
 		// Validación
-		$errores_finales = validarUsuario($_POST);
+		$errores_finales = $validator->validarUsuario($_POST);
 
     if (empty($errores_finales)){
 
        $usr_selec = $_POST["usr"];
-       $todo = $_POST;
+      //  $todo = $_POST;
+       $usr_ok = $db->comprobarUsuario($usr_selec);
 
-       $usr_ok = comprobarUsuario($usr_selec,$todo);
-
-       if (empty($usr_ok)) {
+       if (!isset($usr_ok)) {
          $errores_finales['er_usr'] =  'Usuario Erroneo';
        } else {
            if (!password_verify($_POST["pass"], $usr_ok["password"])) {
              $errores_finales['er_pass'] =  'Usuario o Password Incorrecta';
            } else {
              // Guardo al ID del usuario en $_SESSION.
-             loguear($usr_ok);
+             $auth->loguear($usr_ok);
 
              // Si el boton de recordar pass esta actvado guardo $_COOKIE.
 
              if (isset($_POST["remember"])) {
-
-                guardar_cookie($usr_ok);
-
+                $auth->guardar_cookie($usr_ok);
              }
-
-             ingresar_al_menu();
+               header('location: main_menu.php'); exit;
            }
        }
 	 }
@@ -129,7 +76,7 @@
 					if (isset($errores_finales['er_usr'])):
 					?>
 					 <div class="">
-						 <span class="error_usr" >.</span>
+						 <img class="error_usr" src="../images/logo_errores.png" alt="">
 					 </div>
 					<?php endif; ?> <br><br>
 
@@ -141,7 +88,7 @@
 						if (isset($errores_finales['er_pass'])):
 						?>
 						 <div class="div_err_pass">
-               <span class="error_pass" >.</span>
+               <img class="error_pass" src="../images/logo_errores.png" alt="">
       		   </div>
 						<?php endif; ?>
 
@@ -163,8 +110,9 @@
     <?php
       if (!empty($errores_finales)): ?>
         <div class="err_border">
+               <br>
                <?php foreach ($errores_finales as $value) { ?>
-                 <span class="men_er_usr_360" ><?=$value;?></span><br><br>
+                 <img src="../images/logo_errores.png" alt=""><span class="men_er_usr_360" > <?=' - '.$value;?></span><br><br>
                <?php } ?>
         </div>
     <?php endif; ?> <br>
