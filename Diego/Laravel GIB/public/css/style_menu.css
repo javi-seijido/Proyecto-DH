@@ -147,9 +147,7 @@ ul.nav-items li a span {
   display: none;
 }
 
-.img_user{
-  width: 30%;
-}
+
 
 
 #Usuarios a span {
@@ -188,10 +186,11 @@ ul.nav-items li a span {
 }
 
 .control-menu2 {
+    clear: both;
     background-color: transparent;
     display: block;
-    width: 100%;
-    position: absolute;
+    width: 87%;
+    position: relative;
     left: 30%;
 }
 .control-menu2 a span {
@@ -212,45 +211,22 @@ ul.nav-items li a span {
 }
 
 ul.nav-items2 {
+    display: none;
     clear: both;
     height: 0;
     overflow: hidden;
     /*transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; /*El menú cambia su altura y su color de fondo mediante una transición suavizada al voover a su estado unicial*/*/
     position: absolute;
     overflow: hidden;
-}
 
-#navigation2:target ul.nav-items2 {
     background-color: rgb(255, 255, 255);
     height:auto;
-    width: 119%;
+    width: 118%;
     position: absolute;
     top: 42px;
-    left: -1%;
+    /*left: -1%;*/
 }
 
-
-/*Al hacer clic sobre el enlace que abre el menú éste desaparece*/
-
-.close2 {
-   display:none;
-}
-
-#navigation2:target .open2 {
-      display: none;
-}
-
-/* Al hacer clic sobre el enlace que abre el menú aparece el enlace .close que previamente estaba oculto*/
-
-#navigation2:target .close2 {
-        display: block;
-}
-
-/*Estilos menu*/
-
-ul.nav-items2 li {
-    display: block;
-}
 ul.nav-items2 a {
     border-top: 2px dotted #dddbdb;
     color: #333;
@@ -286,6 +262,37 @@ ul.nav-items2 li a span {
   top: 3px;
 }
 
+.user_login{
+  position: absolute;
+  color:rgb(255, 255, 255);
+  font-size: 10px;
+  font-style: italic;
+  margin:3em -11em;
+}
+
+.img_user{
+  position: absolute;
+  left: 53%;
+  width: 48%;
+  /*margin-left: 6.3em;*/
+}
+
+@media (min-width: 650px){
+  .user_login{
+    position: absolute;
+    color:rgb(255, 255, 255);
+    font-size: 10px;
+    font-style: italic;
+    margin:3em -9em;
+  }
+
+  .img_user{
+    left: 70%;
+    /*margin-left: 6.3em;*/
+  }
+
+}
+
 @media (min-width: 1200px){
 
   .img_consultas{
@@ -302,5 +309,27 @@ ul.nav-items2 li a span {
     margin-left: 1.5em;
     top: 3px;
   }
+
+  /*.img_user{
+    width: 42%;
+    margin-left: 9em;
+  }*/
+  ul.nav-items2 {
+    width: 160%;
+  }
+
+  .user_login{
+    position: absolute;
+    color:rgb(255, 255, 255);
+    font-size: 14px;
+    font-style: italic;
+    margin:2em -9em;
+  }
+
+  .img_user{
+    left: 100%;
+    /*margin-left: 6.3em;*/
+  }
+
 
 }

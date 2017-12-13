@@ -11,15 +11,23 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/home', function () {
-    return view('manu');
-});
+Route::get('/menu', function () {
+    return view('menu');
+})->middleware('auth');
 
 Auth::routes();
+
+Route::get('/personal', function(){
+  return view('registro_personal');
+})->name('per');
+
+Route::post('/personal', function(){
+  return view('registro_personal');
+});
 
 //
 // Route::get('/home', 'HomeController@index')->name('home');

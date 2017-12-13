@@ -24,6 +24,18 @@ class DatabaseSeeder extends Seeder
          'act' 		  =>	'1',
          'perfil_id' => '1']);
 
+       \DB::table('locationes')->insert(
+       ['name'  =>	'Avellaneda']);
+
+       \DB::table('streets')->insert(
+       ['name'  =>	'Calle Falsa',
+        'num_from'  =>	'0',
+        'num_to'  =>	'2000',
+        'state'  =>	'Buenos Aires',
+        'locationes_id'  =>	'1']);
+
+        \DB::table('ranks')->insert(
+        ['name'  =>	'Bombero']);
 
     }
 }
