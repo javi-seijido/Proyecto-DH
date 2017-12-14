@@ -19,6 +19,10 @@ Route::get('/home', function () {
     return view('manu');
 });
 
+Route::get('/users', function () {
+    return view('abmUsers');
+});
+
 Auth::routes();
 
 //
