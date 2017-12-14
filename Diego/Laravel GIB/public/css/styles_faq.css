@@ -102,7 +102,7 @@ text-align: center;
 }
 
 .pagination li{
-	font-size: 20px;
+	font-size: 40px;
 	margin: 2px 5px;
 	color: #858585;
 	cursor: pointer;
@@ -129,6 +129,11 @@ text-align: center;
 
 .right{
 	right: 10px;
+}
+
+.flecha{
+	font-family: impact;
+	font-size: 48px;
 }
 
 .footer_reg{
