@@ -34,27 +34,27 @@ form_login.onsubmit = function(e){
                e.preventDefault();
                error_pass.style.display = 'block';
    }
-}
+};
 
 form_login.usr.addEventListener('focus', function(){
   error_user.style.display = 'none';
   this.className = 'us_log';
-})
+});
 
 form_login.pass.addEventListener('focus', function(){
   error_pass.style.display = 'none';
   this.className = 'pa_log';
 
-})
+});
 
 form_login.usr.addEventListener('blur', function(){
   if (this.value == ''){
       this.className = this.className + ' marcar_input';
   }
-})
+});
 
 form_login.pass.addEventListener('blur', function(){
   if (this.value == ''){
       this.className = this.className + ' marcar_input';
   }
-})
+});

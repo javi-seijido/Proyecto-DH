@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.reset-pass')
 
 @section('content')
 <div class="container">

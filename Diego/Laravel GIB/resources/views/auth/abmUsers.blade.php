@@ -27,7 +27,7 @@
 
                             <!-- <div class="col-md-6"> -->
                                 <!-- <input id="usr" class="us_log" type="text" name="username" placeholder=" User" value="{{ old('usr') }}" autofocus> <br><br> -->
-                                <input id="usr" class="us_log" type="text" name="email" placeholder=" Email" value="{{ old('email') }}" autofocus> <br><br>
+                                <input id="usr" class="us_log" type="text" name="email" placeholder="email" value="{{ old('email') }}" autofocus> <br><br>
                                 <!-- <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus> -->
                                 <div id="err_user">
                                   <img class="error_usr" src="../images/logo_errores.png" alt="">

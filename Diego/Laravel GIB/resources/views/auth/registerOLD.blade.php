@@ -1,6 +1,5 @@
 @extends('layouts.app')
-<link href="{{ asset('css/normalize.css') }}" rel="stylesheet">
-<link href="/css/styles_users.css" rel="stylesheet">
+
 @section('content')
 <div class="container">
     <div class="row">
@@ -62,9 +61,9 @@
                             </div>
                         </div>
 
-                        <div >
+                        <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                                <button type="input" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>
                             </div>
