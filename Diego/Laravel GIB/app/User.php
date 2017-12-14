@@ -15,11 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'email', 'password', 'username', 'act', 'perfil_id'
+        'id', 'email', 'password', 'username', 'act', 'perfil_id'
     ];
 
     public function profiles(){
-           return $this->belongsTo(Profile::class, 'perfil_id');
+           return $this->belongsTo(Profile::class, 'perfil_id')
     }
 
     /**
