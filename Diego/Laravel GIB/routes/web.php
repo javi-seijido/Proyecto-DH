@@ -33,6 +33,10 @@ Route::post('/personal', function(){
   return view('registro_personal');
 });
 
+Route::get('/faq', function () {
+    return view('faq');
+});
+
 //
 // Route::get('/home', 'HomeController@index')->name('home');
 //
