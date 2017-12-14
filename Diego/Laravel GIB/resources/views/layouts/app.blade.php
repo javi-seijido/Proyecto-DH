@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <title>{{ config('app.name', 'Sistema de Gestion GIB') }}</title>
 
     <!-- Styles -->
     @yield('links')
@@ -77,6 +78,6 @@
     <!-- Scripts -->
 
     <script src="{{ asset('js/app.js') }}"></script>
-    <!-- <script src="{{ asset('js/control-login.js') }}"></script> -->
+    <script src="{{ asset('js/control-login.js') }}"></script>
 </body>
 </html>
